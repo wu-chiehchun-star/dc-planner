@@ -29,6 +29,13 @@
     }
   }
   </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script>
+    if (window.pdfjsLib) {
+      pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+      pdfjsLib.disableWorker = true;
+    }
+  </script>
 </head>
 <body class="bg-[#f7f6f3] text-[#37352f] antialiased overflow-hidden font-sans">
   <div id="root"></div>
@@ -43,11 +50,11 @@
     const LOCALE_LABELS = { zh: '中', en: '英', ja: '日' };
     const TRANSLATIONS = {
       zh: {
-        undo: '上一步', redo: '下一步', zoomOut: '縮小', zoomIn: '放大', resetView: '重置視角', noBackground: '無背景', dots: '點陣', grid: '網格', iso: '等角透視', snap: '鎖點', sketch: '手繪', background: '背景', pasteImage: '貼圖', clearBackground: '刪除背景', legend: '圖例', svg: 'SVG', png: 'PNG', dxf: 'DXF', pdf: 'PDF', iconLibrary: 'ICON', delete: '刪除', toggleSidebar: '切換右窗格', iconLibraryTitle: '自定義ICON庫', group: '群組', ungroup: '解散', alignLeft: '靠左對齊', alignCenter: '水平置中', alignRight: '靠右對齊', alignTop: '靠上對齊', alignBottom: '靠下對齊', moveHorizontal: '水平等距', moveVertical: '垂直等距', mirrorHorizontal: '水平鏡射', mirrorVertical: '垂直鏡射', measureAndGuides: '測量&參考線', measureHorizontal: '水平', measureVertical: '垂直', measure: '測量', pan: '平移', select: '選取', icon: '圖示庫', arrow: '動線', curveArrow: '轉彎', solidLine: '直線', dashedLine: '虛線', zone: '分區', circleZone: '圓形分區', highlight: '重點', road: '幹道', node: '節點', marker: '標示', text: '文字', leaderText: '引線', language: '語言', toggleToolbar: '隱藏左側工具列', newFile: '新檔案', iconCategory: '圖示類別', layersTitle: '層級與管理', addLayer: '+ 新增圖層', addFolder: '+ 新增資料夾', editNameHint: '雙擊修改名稱', showHide: '顯示/隱藏', lockUnlock: '鎖定/解鎖', normalFade: '正常/淡化', moveUp: '上移', moveDown: '下移', deleteFolder: '刪除資料夾', deleteLayer: '刪除圖層', objectSettings: '物件設定', bringToFront: '移至最前', sendToBack: '移至最後', lockPosition: '位置鎖定 (停用拖曳與框選)', customColorTitle: '自訂顏色 (客製化配色)', legendTitleLabel: '圖例標題', legendPlaceholder: '圖例說明', itemLabel: '項目', upload: '上傳', scaleSize: '縮放大小', scaleSizeWidth: '縮放大小 (寬度)', rotationAngle: '旋轉角度', style: '樣式', gradient: '漸層', thickRings: '粗環', thinRings: '細環', dottedRings: '點陣環', radius: '半徑 (Radius)', direction: '方向', titleTop: '主標題 (靠上)', titleBottom: '副標題 (靠下)', textContent: '文字內容 (支援多行)', fontSize: '字體大小', showBackgroundBox: '顯示帶框白底', width: '寬度', height: '高度', strokeWidth: '線條粗細', segmentDivide: '線段等分 (重製節點)', divide: '等分', arrowSize: '箭頭大小', cornerRadius: '圓角 / 弧度', lineStyle: '線條樣式', lineSolid: '實線', lineDash: '一般虛線', lineDashDense: '密集虛線', lineDashLong: '長虛線', lineDashDot: '點劃線', arrowStyle: '箭頭樣式', arrowStandard: '標準箭頭', arrowStealth: '銳利 (Stealth)', arrowFlat: '平底', arrowCircle: '圓點', multiArrow: '每段顯示箭頭', doubleArrow: '雙向箭頭', showArrow: '顯示末端箭頭', fillOpacity: '背景透明度', fillPattern: '填色樣式', fillSolid: '實色填充', fillStripe: '斜線', fillCrosshatch: '網格', fillDots: '點陣', blendMode: '混合模式', blendNormal: '普通', blendMultiply: '色彩增值', blendScreen: '濾色', blendOverlay: '覆蓋', close: '關閉', copy: '複製', paste: '貼上', arrayCopy: '陣列複製', pathArray: '沿路徑陣列', pathArrayPromptSelect: '請先選擇一條動線和一個圖示物件。', pathArrayInvalidPath: '目前只支援具有連續點陣的動線。', pathArrayCountPrompt: '沿路徑排列幾個圖示?', alignTools: '對齊工具', zoneOperations: '區域操作', zoneUnion: '聯集', zoneIntersection: '交集', zoneDifference: '差集', mergeLines: '合併線', noSelection: '無選取物件', iconLibraryNoItems: '還沒有自定義ICON', iconLibraryUploadHint: '上傳SVG文件來創建', uploadStart: '開始上傳', addToCanvas: '加入', uploadMore: '上傳更多', smartFill: '智能填充', smartFillDone: '✓ 已套用智能填充', fillClosedArea: '填充封閉區域', alertFillClosedAreaInvalid: '請選取封閉線段後再填充。', fillClosedAreaDone: '✓ 已建立填充區域', alertSmartFillNoTargets: '沒有可填充的區塊！', backup: '備份', download: '下載', meterScaleLabel: '1m 對應像素', scaleHint: '輸入每公尺對應的像素值以校正比例。', actualDistance: '實際距離 (mm)', setScaleFromMeasure: '以量測線設定比例', applyScale: '套用比例', currentScale: '目前比例', saveSnapshot: '儲存快照', loadSnapshot: '切換快照', snapshot: '快照', customIconsStored: '✓ 已存儲 {count} 個自定義圖示', measureTitle: '測量工具設定', pixelMmRatio: '像素/毫米比例', standardDpiHint: '標準96 DPI = 3.78 px/mm', clearMeasureResults: '清除測量結果', measurementResults: '測量結果', measureItem: '測量 {index}', helpTitle: '快捷鍵與操作指南', helpUndoRedo: '復原 / 重做', helpGroupUngroup: '群組 / 解散', helpMergeObjects: '合併物件(線/區塊)', helpDeleteObjects: '刪除物件', helpTempUnlock: '暫時取消鎖點', helpSwitchTools: '切換工具(前/後)', helpToggleSketch: '手繪模式切換', helpMultiSelect: '多重選取', helpDistribute: '等距排列', helpCanvasZoom: '畫布縮放', helpContextMenu: '操作選單', helpAltClick: '按住 Alt', helpSelect3Plus: '選取 3 個以上', helpCtrlWheel: 'Ctrl + 滾輪', helpRightClick: '右鍵點擊', helpButtonTitle: '快捷鍵說明', sopTitle: 'SOP 操作指南', sopStep1Title: '1. 基礎作圖', sopStep1Desc: '點擊左側工具列 (動線、區塊、圖示等)，在畫布上點擊或拖曳即可建立物件。', sopStep2Title: '2. 屬性與樣式', sopStep2Desc: '使用「選取」工具點擊物件，即可在右下角面板調整顏色、粗細、虛線及圖示類型。', sopStep3Title: '3. 節點微調', sopStep3Desc: '選取物件後會顯示白色控制點，拖曳可改變形狀；曲線則可拖曳灰色控制點調整弧度。', sopStep4Title: '4. 群組與對齊', sopStep4Desc: '框選多個物件可打包為「群組」，或使用上方工具列進行「水平 / 垂直等距」排列。', sopStep5Title: '5. 進階運算', sopStep5Desc: '框選多條動線可「合併」；框選多個區塊可進行「聯集、交集、差集」布林運算。', sopStep6Title: '6. 陣列複製', sopStep6Desc: '選取物件後點擊「右鍵」，選擇「陣列複製」即可快速產生等距網格。', sopStep7Title: '7. 手繪風格', sopStep7Desc: '上方的「手繪」按鈕開啟後，可切換到草圖風格。', sopStep8Title: '8. 匯出與圖例', sopStep8Desc: '完成後點擊「生成圖例」，再選擇「SVG輸出」或「PNG輸出」下載。', alertEmptyZoneResult: '操作結果為空區塊！', alertGeometryFailed: '幾何運算失敗', alertLayerLocked: '圖層已鎖定', defaultLeaderTop: '標題', defaultLeaderBottom: '副標', defaultText: '文字', alertSelectImageFile: '請選擇圖片檔', alertCustomIconUploaded: '已上傳自定義ICON: {iconName}', alertSelectValidSVG: '請選擇有效的SVG文件', alertImportedIcons: '已匯入 {count} 個自定義ICON', alertInvalidJSON: 'JSON文件格式錯誤', alertSelectTwoZones: '❌ 請選擇 2 個或以上的分區！\n目前已選: {count} 個\n\n提示: 用「選取」工具選擇分區', alertZoneSuccess: '✓ {operation} 操作成功！', alertLegendNoVisible: '目前沒有可見物件可產生圖例', iconToCanvas: '加入', categoryHuman: '人物', categoryVehicle: '乘物', categoryTree: '植栽', categoryCompass: '方位記號', categoryLocationPin: '位置記號', categoryScaleBar: '比例尺', defaultIconLabel: '圖示', labelArrow: '動線', labelSpline: '曲線', labelZone: '區塊', labelCircleZone: '圓形區塊', labelHighlight: '重點', labelRadiatingCircle: '影響範圍', labelObject: '物件'    },
+        undo: '上一步', redo: '下一步', zoomOut: '縮小', zoomIn: '放大', resetView: '重置視角', noBackground: '無背景', dots: '點陣', grid: '網格', iso: '等角透視', snap: '鎖點', sketch: '手繪', background: '背景', pasteImage: '貼圖', clearBackground: '刪除背景', legend: '圖例', svg: 'SVG', png: 'PNG', dxf: 'DXF', pdf: 'PDF', iconLibrary: 'ICON', delete: '刪除', toggleSidebar: '切換右窗格', iconLibraryTitle: '自定義ICON庫', group: '群組', ungroup: '解散', alignLeft: '靠左對齊', alignCenter: '水平置中', alignRight: '靠右對齊', alignTop: '靠上對齊', alignBottom: '靠下對齊', moveHorizontal: '水平等距', moveVertical: '垂直等距', mirrorHorizontal: '水平鏡射', mirrorVertical: '垂直鏡射', measureAndGuides: '測量&參考線', measureHorizontal: '水平', measureVertical: '垂直', measure: '測量', pan: '平移', select: '選取', eraser: '橡皮擦', icon: '圖示庫', arrow: '動線', curveArrow: '轉彎', solidLine: '直線', dashedLine: '虛線', zone: '分區', circleZone: '圓形分區', highlight: '重點', road: '幹道', node: '節點', marker: '標示', text: '文字', leaderText: '引線', language: '語言', toggleToolbar: '隱藏左側工具列', newFile: '新檔案', iconCategory: '圖示類別', layersTitle: '層級與管理', addLayer: '+ 新增圖層', addFolder: '+ 新增資料夾', editNameHint: '雙擊修改名稱', showHide: '顯示/隱藏', lockUnlock: '鎖定/解鎖', normalFade: '正常/淡化', moveUp: '上移', moveDown: '下移', deleteFolder: '刪除資料夾', deleteLayer: '刪除圖層', objectSettings: '物件設定', bringToFront: '移至最前', sendToBack: '移至最後', lockPosition: '位置鎖定 (停用拖曳與框選)', customColorTitle: '自訂顏色 (客製化配色)', legendTitleLabel: '圖例標題', legendPlaceholder: '圖例說明', itemLabel: '項目', upload: '上傳', scaleSize: '縮放大小', scaleSizeWidth: '縮放大小 (寬度)', rotationAngle: '旋轉角度', style: '樣式', gradient: '漸層', thickRings: '粗環', thinRings: '細環', dottedRings: '點陣環', radius: '半徑 (Radius)', direction: '方向', titleTop: '主標題 (靠上)', titleBottom: '副標題 (靠下)', textContent: '文字內容 (支援多行)', fontSize: '字體大小', showBackgroundBox: '顯示帶框白底', width: '寬度', height: '高度', strokeWidth: '線條粗細', segmentDivide: '線段等分 (重製節點)', divide: '等分', arrowSize: '箭頭大小', cornerRadius: '圓角 / 弧度', lineStyle: '線條樣式', lineSolid: '實線', lineDash: '一般虛線', lineDashDense: '密集虛線', lineDashLong: '長虛線', lineDashDot: '點劃線', arrowStyle: '箭頭樣式', arrowStandard: '標準箭頭', arrowStealth: '銳利 (Stealth)', arrowFlat: '平底', arrowCircle: '圓點', multiArrow: '每段顯示箭頭', doubleArrow: '雙向箭頭', showArrow: '顯示末端箭頭', fillOpacity: '背景透明度', fillPattern: '填色樣式', fillSolid: '實色填充', fillStripe: '斜線', fillCrosshatch: '網格', fillDots: '點陣', blendMode: '混合模式', blendNormal: '普通', blendMultiply: '色彩增值', blendScreen: '濾色', blendOverlay: '覆蓋', close: '關閉', copy: '複製', paste: '貼上', arrayCopy: '陣列複製', pathArray: '沿路徑陣列', pathArrayPromptSelect: '請先選擇一條動線和一個圖示物件。', pathArrayInvalidPath: '目前只支援具有連續點陣的動線。', pathArrayCountPrompt: '沿路徑排列幾個圖示?', alignTools: '對齊工具', zoneOperations: '區域操作', zoneUnion: '聯集', zoneIntersection: '交集', zoneDifference: '差集', mergeLines: '合併線', noSelection: '無選取物件', iconLibraryNoItems: '還沒有自定義ICON', iconLibraryUploadHint: '上傳SVG文件來創建', uploadStart: '開始上傳', addToCanvas: '加入', uploadMore: '上傳更多', smartFill: '智能填充', smartFillDone: '✓ 已套用智能填充', fillClosedArea: '填充封閉區域', alertFillClosedAreaInvalid: '請選取封閉線段後再填充。', fillClosedAreaDone: '✓ 已建立填充區域', alertSmartFillNoTargets: '沒有可填充的區塊！', backup: '備份', download: '下載', saveProject: '存檔', loadProject: '讀取', meterScaleLabel: '1m 對應像素', scaleHint: '輸入每公尺對應的像素值以校正比例。', actualDistance: '實際距離 (mm)', setScaleFromMeasure: '以量測線設定比例', applyScale: '套用比例', currentScale: '目前比例', saveSnapshot: '儲存快照', loadSnapshot: '切換快照', snapshot: '快照', customIconsStored: '✓ 已存儲 {count} 個自定義圖示', measureTitle: '測量工具設定', pixelMmRatio: '像素/毫米比例', standardDpiHint: '標準96 DPI = 3.78 px/mm', clearMeasureResults: '清除測量結果', measurementResults: '測量結果', measureItem: '測量 {index}', helpTitle: '快捷鍵與操作指南', helpUndoRedo: '復原 / 重做', helpGroupUngroup: '群組 / 解散', helpMergeObjects: '合併物件(線/區塊)', helpDeleteObjects: '刪除物件', helpTempUnlock: '暫時取消鎖點', helpSwitchTools: '切換工具(前/後)', helpToggleSketch: '手繪模式切換', helpMultiSelect: '多重選取', helpDistribute: '等距排列', helpCanvasZoom: '畫布縮放', helpContextMenu: '操作選單', helpAltClick: '按住 Alt', helpSelect3Plus: '選取 3 個以上', helpCtrlWheel: 'Ctrl + 滾輪', helpRightClick: '右鍵點擊', helpButtonTitle: '快捷鍵說明', sopTitle: 'SOP 操作指南', sopStep1Title: '1. 基礎作圖', sopStep1Desc: '點擊左側工具列 (動線、區塊、圖示等)，在畫布上點擊或拖曳即可建立物件。', sopStep2Title: '2. 屬性與樣式', sopStep2Desc: '使用「選取」工具點擊物件，即可在右下角面板調整顏色、粗細、虛線及圖示類型。', sopStep3Title: '3. 節點微調', sopStep3Desc: '選取物件後會顯示白色控制點，拖曳可改變形狀；曲線則可拖曳灰色控制點調整弧度。', sopStep4Title: '4. 群組與對齊', sopStep4Desc: '框選多個物件可打包為「群組」，或使用上方工具列進行「水平 / 垂直等距」排列。', sopStep5Title: '5. 進階運算', sopStep5Desc: '框選多條動線可「合併」；框選多個區塊可進行「聯集、交集、差集」布林運算。', sopStep6Title: '6. 陣列複製', sopStep6Desc: '選取物件後點擊「右鍵」，選擇「陣列複製」即可快速產生等距網格。', sopStep7Title: '7. 手繪風格', sopStep7Desc: '上方的「手繪」按鈕開啟後，可切換到草圖風格。', sopStep8Title: '8. 匯出與圖例', sopStep8Desc: '完成後點擊「生成圖例」，再選擇「SVG輸出」或「PNG輸出」下載。', alertEmptyZoneResult: '操作結果為空區塊！', alertGeometryFailed: '幾何運算失敗', alertLayerLocked: '圖層已鎖定', defaultLeaderTop: '標題', defaultLeaderBottom: '副標', defaultText: '文字', alertSelectImageFile: '請選擇圖片檔', alertCustomIconUploaded: '已上傳自定義ICON: {iconName}', alertSelectValidSVG: '請選擇有效的SVG文件', alertImportedIcons: '已匯入 {count} 個自定義ICON', alertInvalidJSON: 'JSON文件格式錯誤', alertSelectTwoZones: '❌ 請選擇 2 個或以上的分區！\n目前已選: {count} 個\n\n提示: 用「選取」工具選擇分區', alertZoneSuccess: '✓ {operation} 操作成功！', alertLegendNoVisible: '目前沒有可見物件可產生圖例', iconToCanvas: '加入', categoryHuman: '人物', categoryVehicle: '乘物', categoryTree: '植栽', categoryCompass: '方位記號', categoryLocationPin: '位置記號', categoryScaleBar: '比例尺', defaultIconLabel: '圖示', labelArrow: '動線', labelSpline: '曲線', labelZone: '區塊', labelCircleZone: '圓形區塊', labelHighlight: '重點', labelRadiatingCircle: '影響範圍', labelObject: '物件'    },
       en: {
-        undo: 'Undo', redo: 'Redo', zoomOut: 'Zoom Out', zoomIn: 'Zoom In', resetView: 'Reset View', noBackground: 'No Grid', dots: 'Dots', grid: 'Grid', iso: 'Isometric', snap: 'Snap', sketch: 'Sketch', background: 'Background', pasteImage: 'Image', clearBackground: 'Clear BG', legend: 'Legend', svg: 'SVG', png: 'PNG', dxf: 'DXF', pdf: 'PDF', iconLibrary: 'ICON', delete: 'Delete', toggleSidebar: 'Toggle Sidebar', iconLibraryTitle: 'Custom ICONs', group: 'Group', ungroup: 'Ungroup', alignLeft: 'Align Left', alignCenter: 'Align Center', alignRight: 'Align Right', alignTop: 'Align Top', alignBottom: 'Align Bottom', moveHorizontal: 'Distribute H', moveVertical: 'Distribute V', mirrorHorizontal: 'Mirror H', mirrorVertical: 'Mirror V', measureAndGuides: 'Measure & Guides', measureHorizontal: 'H Guide', measureVertical: 'V Guide', measure: 'Measure', pan: 'Pan', select: 'Select', icon: 'Icon Lib', arrow: 'Flow', curveArrow: 'Curve', solidLine: 'Line', dashedLine: 'Dashed', zone: 'Zone', circleZone: 'Circle Zone', highlight: 'Highlight', road: 'Road', node: 'Node', marker: 'Marker', text: 'Text', leaderText: 'Leader', language: 'Language', toggleToolbar: 'Toggle left toolbar', newFile: 'New File', iconCategory: 'Icon Category', layersTitle: 'Layers', addLayer: '+ Add Layer', addFolder: '+ Add Folder', editNameHint: 'Double-click to rename', showHide: 'Show/Hide', lockUnlock: 'Lock/Unlock', normalFade: 'Normal/Fade', moveUp: 'Move Up', moveDown: 'Move Down', deleteFolder: 'Delete Folder', deleteLayer: 'Delete Layer', objectSettings: 'Properties', bringToFront: 'Bring to Front', sendToBack: 'Send to Back', lockPosition: 'Lock Position (disable drag/select)', customColorTitle: 'Custom color', legendTitleLabel: 'Legend title', legendPlaceholder: 'Legend description', itemLabel: 'Item', upload: 'Upload', scaleSize: 'Scale', scaleSizeWidth: 'Scale (width)', rotationAngle: 'Rotation', style: 'Style', gradient: 'Gradient', thickRings: 'Thick Rings', thinRings: 'Thin Rings', dottedRings: 'Dotted Rings', radius: 'Radius', direction: 'Direction', titleTop: 'Title Top', titleBottom: 'Subtitle Bottom', textContent: 'Text content (multiline)', fontSize: 'Font Size', showBackgroundBox: 'Show white box', width: 'Width', height: 'Height', strokeWidth: 'Stroke Width', segmentDivide: 'Segment Divide', divide: 'Divide', arrowSize: 'Arrow Size', cornerRadius: 'Corner / Radius', lineStyle: 'Line Style', lineSolid: 'Solid', lineDash: 'Dashed', lineDashDense: 'Dense Dash', lineDashLong: 'Long Dash', lineDashDot: 'Dash Dot', arrowStyle: 'Arrow Style', arrowStandard: 'Standard', arrowStealth: 'Stealth', arrowFlat: 'Flat', arrowCircle: 'Circle', multiArrow: 'Multi Arrow', doubleArrow: 'Double Arrow', showArrow: 'Show End Arrow', fillOpacity: 'Fill Opacity', fillPattern: 'Fill Pattern', fillSolid: 'Solid Fill', fillStripe: 'Stripes', fillCrosshatch: 'Crosshatch', fillDots: 'Dots', blendMode: 'Blend Mode', blendNormal: 'Normal', blendMultiply: 'Multiply', blendScreen: 'Screen', blendOverlay: 'Overlay', close: 'Close', copy: 'Copy', paste: 'Paste', arrayCopy: 'Array Copy', pathArray: 'Path Array', pathArrayPromptSelect: 'Please select a path and an icon object.', pathArrayInvalidPath: 'Only continuous, point-based paths are supported.', pathArrayCountPrompt: 'How many icons to distribute along the path?', alignTools: 'Align tools', zoneOperations: 'Zone operations', zoneUnion: 'Union', zoneIntersection: 'Intersection', zoneDifference: 'Difference', mergeLines: 'Merge Lines', noSelection: 'No selected objects', iconLibraryNoItems: 'No custom icons yet', iconLibraryUploadHint: 'Upload SVG to create', uploadStart: 'Upload now', addToCanvas: 'Add', uploadMore: 'Upload more', smartFill: 'Smart Fill', smartFillDone: '✓ Smart fill applied', fillClosedArea: 'Fill Closed Area', alertFillClosedAreaInvalid: 'Select a closed loop of lines first.', fillClosedAreaDone: '✓ Closed area filled', alertSmartFillNoTargets: 'No targets available for smart fill!', backup: 'Backup', download: 'Download', meterScaleLabel: 'Pixels per meter', scaleHint: 'Enter the px value for one meter to calibrate scale.', actualDistance: 'Actual distance (mm)', setScaleFromMeasure: 'Set scale from measurement', applyScale: 'Apply scale', currentScale: 'Current scale', saveSnapshot: 'Save snapshot', loadSnapshot: 'Load snapshot', snapshot: 'Snapshot', customIconsStored: '✓ {count} custom icons saved', measureTitle: 'Measurement settings', pixelMmRatio: 'Pixels per mm', standardDpiHint: 'Standard 96 DPI = 3.78 px/mm', clearMeasureResults: 'Clear measurement results', measurementResults: 'Measurement results', measureItem: 'Measure {index}', helpTitle: 'Keyboard & Operations', helpUndoRedo: 'Undo / Redo', helpGroupUngroup: 'Group / Ungroup', helpMergeObjects: 'Merge objects (lines/zones)', helpDeleteObjects: 'Delete objects', helpTempUnlock: 'Temporarily unlock points', helpSwitchTools: 'Switch tools (prev/next)', helpToggleSketch: 'Toggle sketch mode', helpMultiSelect: 'Multi-select', helpDistribute: 'Distribute evenly', helpCanvasZoom: 'Canvas zoom', helpContextMenu: 'Context menu', helpAltClick: 'Hold Alt', helpSelect3Plus: 'Select 3+ items', helpCtrlWheel: 'Ctrl + Wheel', helpRightClick: 'Right click', helpButtonTitle: 'Shortcut help', sopTitle: 'SOP Guide', sopStep1Title: '1. Basic drawing', sopStep1Desc: 'Click a tool on the left (flow, zone, icon, etc.) and click or drag on the canvas to create objects.', sopStep2Title: '2. Properties & styles', sopStep2Desc: 'Use the Select tool on an object to adjust color, weight, dash, and icon type in the bottom-right panel.', sopStep3Title: '3. Node editing', sopStep3Desc: 'Selecting an object shows white control points you can drag to reshape it; drag the grey point on curves to adjust the arc.', sopStep4Title: '4. Group & align', sopStep4Desc: 'Select multiple objects to group them or use the top toolbar for horizontal/vertical distribution.', sopStep5Title: '5. Advanced operations', sopStep5Desc: 'Select multiple flow lines to merge; select multiple zones for union, intersection, or difference.', sopStep6Title: '6. Array duplicate', sopStep6Desc: 'Right-click after selecting objects and choose Array Copy to generate a grid quickly.', sopStep7Title: '7. Sketch style', sopStep7Desc: 'Turn on the Sketch mode button above to switch to a rough hand-drawn style instantly.', sopStep8Title: '8. Export and legend', sopStep8Desc: 'When complete, click Generate Legend, then download using SVG Export or PNG Export.', alertEmptyZoneResult: 'Result is empty!', alertGeometryFailed: 'Geometry operation failed', alertLayerLocked: 'Layer is locked', defaultLeaderTop: 'Title', defaultLeaderBottom: 'Subtitle', defaultText: 'Text', alertSelectImageFile: 'Please select an image file', alertCustomIconUploaded: 'Uploaded custom icon: {iconName}', alertSelectValidSVG: 'Please select a valid SVG file', alertImportedIcons: 'Imported {count} custom icons', alertInvalidJSON: 'Invalid JSON file format', alertSelectTwoZones: '❌ Please select 2 or more zones!\nSelected: {count}\n\nTip: use the Select tool to choose zones', alertZoneSuccess: '✓ {operation} operation successful!', alertLegendNoVisible: 'No visible objects to generate legend', iconToCanvas: 'Add', categoryHuman: 'Human', categoryVehicle: 'Vehicle', categoryTree: 'Tree', categoryCompass: 'Compass', categoryLocationPin: 'Location pin', categoryScaleBar: 'Scale bar', defaultIconLabel: 'Icon', labelArrow: 'Flow', labelSpline: 'Curve', labelZone: 'Zone', labelCircleZone: 'Circle zone', labelHighlight: 'Highlight', labelRadiatingCircle: 'Radiating circle', labelObject: 'Object'      },
+        undo: 'Undo', redo: 'Redo', zoomOut: 'Zoom Out', zoomIn: 'Zoom In', resetView: 'Reset View', noBackground: 'No Grid', dots: 'Dots', grid: 'Grid', iso: 'Isometric', snap: 'Snap', sketch: 'Sketch', background: 'Background', pasteImage: 'Image', clearBackground: 'Clear BG', legend: 'Legend', svg: 'SVG', png: 'PNG', dxf: 'DXF', pdf: 'PDF', iconLibrary: 'ICON', delete: 'Delete', toggleSidebar: 'Toggle Sidebar', iconLibraryTitle: 'Custom ICONs', group: 'Group', ungroup: 'Ungroup', alignLeft: 'Align Left', alignCenter: 'Align Center', alignRight: 'Align Right', alignTop: 'Align Top', alignBottom: 'Align Bottom', moveHorizontal: 'Distribute H', moveVertical: 'Distribute V', mirrorHorizontal: 'Mirror H', mirrorVertical: 'Mirror V', measureAndGuides: 'Measure & Guides', measureHorizontal: 'H Guide', measureVertical: 'V Guide', measure: 'Measure', pan: 'Pan', select: 'Select', eraser: 'Eraser', icon: 'Icon Lib', arrow: 'Flow', curveArrow: 'Curve', solidLine: 'Line', dashedLine: 'Dashed', zone: 'Zone', circleZone: 'Circle Zone', highlight: 'Highlight', road: 'Road', node: 'Node', marker: 'Marker', text: 'Text', leaderText: 'Leader', language: 'Language', toggleToolbar: 'Toggle left toolbar', newFile: 'New File', iconCategory: 'Icon Category', layersTitle: 'Layers', addLayer: '+ Add Layer', addFolder: '+ Add Folder', editNameHint: 'Double-click to rename', showHide: 'Show/Hide', lockUnlock: 'Lock/Unlock', normalFade: 'Normal/Fade', moveUp: 'Move Up', moveDown: 'Move Down', deleteFolder: 'Delete Folder', deleteLayer: 'Delete Layer', objectSettings: 'Properties', bringToFront: 'Bring to Front', sendToBack: 'Send to Back', lockPosition: 'Lock Position (disable drag/select)', customColorTitle: 'Custom color', legendTitleLabel: 'Legend title', legendPlaceholder: 'Legend description', itemLabel: 'Item', upload: 'Upload', scaleSize: 'Scale', scaleSizeWidth: 'Scale (width)', rotationAngle: 'Rotation', style: 'Style', gradient: 'Gradient', thickRings: 'Thick Rings', thinRings: 'Thin Rings', dottedRings: 'Dotted Rings', radius: 'Radius', direction: 'Direction', titleTop: 'Title Top', titleBottom: 'Subtitle Bottom', textContent: 'Text content (multiline)', fontSize: 'Font Size', showBackgroundBox: 'Show white box', width: 'Width', height: 'Height', strokeWidth: 'Stroke Width', segmentDivide: 'Segment Divide', divide: 'Divide', arrowSize: 'Arrow Size', cornerRadius: 'Corner / Radius', lineStyle: 'Line Style', lineSolid: 'Solid', lineDash: 'Dashed', lineDashDense: 'Dense Dash', lineDashLong: 'Long Dash', lineDashDot: 'Dash Dot', arrowStyle: 'Arrow Style', arrowStandard: 'Standard', arrowStealth: 'Stealth', arrowFlat: 'Flat', arrowCircle: 'Circle', multiArrow: 'Multi Arrow', doubleArrow: 'Double Arrow', showArrow: 'Show End Arrow', fillOpacity: 'Fill Opacity', fillPattern: 'Fill Pattern', fillSolid: 'Solid Fill', fillStripe: 'Stripes', fillCrosshatch: 'Crosshatch', fillDots: 'Dots', blendMode: 'Blend Mode', blendNormal: 'Normal', blendMultiply: 'Multiply', blendScreen: 'Screen', blendOverlay: 'Overlay', close: 'Close', copy: 'Copy', paste: 'Paste', arrayCopy: 'Array Copy', pathArray: 'Path Array', pathArrayPromptSelect: 'Please select a path and an icon object.', pathArrayInvalidPath: 'Only continuous, point-based paths are supported.', pathArrayCountPrompt: 'How many icons to distribute along the path?', alignTools: 'Align tools', zoneOperations: 'Zone operations', zoneUnion: 'Union', zoneIntersection: 'Intersection', zoneDifference: 'Difference', mergeLines: 'Merge Lines', noSelection: 'No selected objects', iconLibraryNoItems: 'No custom icons yet', iconLibraryUploadHint: 'Upload SVG to create', uploadStart: 'Upload now', addToCanvas: 'Add', uploadMore: 'Upload more', smartFill: 'Smart Fill', smartFillDone: '✓ Smart fill applied', fillClosedArea: 'Fill Closed Area', alertFillClosedAreaInvalid: 'Select a closed loop of lines first.', fillClosedAreaDone: '✓ Closed area filled', alertSmartFillNoTargets: 'No targets available for smart fill!', backup: 'Backup', download: 'Download', saveProject: 'Save Project', loadProject: 'Load Project', meterScaleLabel: 'Pixels per meter', scaleHint: 'Enter the px value for one meter to calibrate scale.', actualDistance: 'Actual distance (mm)', setScaleFromMeasure: 'Set scale from measurement', applyScale: 'Apply scale', currentScale: 'Current scale', saveSnapshot: 'Save snapshot', loadSnapshot: 'Load snapshot', snapshot: 'Snapshot', customIconsStored: '✓ {count} custom icons saved', measureTitle: 'Measurement settings', pixelMmRatio: 'Pixels per mm', standardDpiHint: 'Standard 96 DPI = 3.78 px/mm', clearMeasureResults: 'Clear measurement results', measurementResults: 'Measurement results', measureItem: 'Measure {index}', helpTitle: 'Keyboard & Operations', helpUndoRedo: 'Undo / Redo', helpGroupUngroup: 'Group / Ungroup', helpMergeObjects: 'Merge objects (lines/zones)', helpDeleteObjects: 'Delete objects', helpTempUnlock: 'Temporarily unlock points', helpSwitchTools: 'Switch tools (prev/next)', helpToggleSketch: 'Toggle sketch mode', helpMultiSelect: 'Multi-select', helpDistribute: 'Distribute evenly', helpCanvasZoom: 'Canvas zoom', helpContextMenu: 'Context menu', helpAltClick: 'Hold Alt', helpSelect3Plus: 'Select 3+ items', helpCtrlWheel: 'Ctrl + Wheel', helpRightClick: 'Right click', helpButtonTitle: 'Shortcut help', sopTitle: 'SOP Guide', sopStep1Title: '1. Basic drawing', sopStep1Desc: 'Click a tool on the left (flow, zone, icon, etc.) and click or drag on the canvas to create objects.', sopStep2Title: '2. Properties & styles', sopStep2Desc: 'Use the Select tool on an object to adjust color, weight, dash, and icon type in the bottom-right panel.', sopStep3Title: '3. Node editing', sopStep3Desc: 'Selecting an object shows white control points you can drag to reshape it; drag the grey point on curves to adjust the arc.', sopStep4Title: '4. Group & align', sopStep4Desc: 'Select multiple objects to group them or use the top toolbar for horizontal/vertical distribution.', sopStep5Title: '5. Advanced operations', sopStep5Desc: 'Select multiple flow lines to merge; select multiple zones for union, intersection, or difference.', sopStep6Title: '6. Array duplicate', sopStep6Desc: 'Right-click after selecting objects and choose Array Copy to generate a grid quickly.', sopStep7Title: '7. Sketch style', sopStep7Desc: 'Turn on the Sketch mode button above to switch to a rough hand-drawn style instantly.', sopStep8Title: '8. Export and legend', sopStep8Desc: 'When complete, click Generate Legend, then download using SVG Export or PNG Export.', alertEmptyZoneResult: 'Result is empty!', alertGeometryFailed: 'Geometry operation failed', alertLayerLocked: 'Layer is locked', defaultLeaderTop: 'Title', defaultLeaderBottom: 'Subtitle', defaultText: 'Text', alertSelectImageFile: 'Please select an image file', alertCustomIconUploaded: 'Uploaded custom icon: {iconName}', alertSelectValidSVG: 'Please select a valid SVG file', alertImportedIcons: 'Imported {count} custom icons', alertInvalidJSON: 'Invalid JSON file format', alertSelectTwoZones: '❌ Please select 2 or more zones!\nSelected: {count}\n\nTip: use the Select tool to choose zones', alertZoneSuccess: '✓ {operation} operation successful!', alertLegendNoVisible: 'No visible objects to generate legend', iconToCanvas: 'Add', categoryHuman: 'Human', categoryVehicle: 'Vehicle', categoryTree: 'Tree', categoryCompass: 'Compass', categoryLocationPin: 'Location pin', categoryScaleBar: 'Scale bar', defaultIconLabel: 'Icon', labelArrow: 'Flow', labelSpline: 'Curve', labelZone: 'Zone', labelCircleZone: 'Circle zone', labelHighlight: 'Highlight', labelRadiatingCircle: 'Radiating circle', labelObject: 'Object'      },
       ja: {
-        undo: '元に戻す', redo: 'やり直し', zoomOut: 'ズームアウト', zoomIn: 'ズームイン', resetView: 'リセット', noBackground: 'なし', dots: 'ドット', grid: 'グリッド', iso: 'アイソメ', snap: 'スナップ', sketch: '手描き', background: '背景', pasteImage: '画像', clearBackground: '背景削除', legend: '凡例', svg: 'SVG', png: 'PNG', dxf: 'DXF', pdf: 'PDF', iconLibrary: 'アイコン', delete: '削除', toggleSidebar: 'サイドバー切替', iconLibraryTitle: 'カスタムアイコン', group: 'グループ', ungroup: '解除', alignLeft: '左揃え', alignCenter: '中央揃え', alignRight: '右揃え', alignTop: '上揃え', alignBottom: '下揃え', moveHorizontal: '横分布', moveVertical: '縦分布', mirrorHorizontal: '水平ミラー', mirrorVertical: '垂直ミラー', measureAndGuides: '測定・補助線', measureHorizontal: '水平線', measureVertical: '垂直線', measure: '測定', pan: 'パン', select: '選択', icon: 'アイコン', arrow: '動線', curveArrow: '曲線', solidLine: '直線', dashedLine: '点線', zone: '区画', circleZone: '円区画', highlight: '強調', road: '道路', node: '点', marker: 'マーカー', text: '文字', leaderText: 'リーダー', language: '言語', toggleToolbar: '左側ツールバー切替', newFile: '新規ファイル', iconCategory: 'アイコンカテゴリ', layersTitle: 'レイヤー管理', addLayer: '+ レイヤー追加', addFolder: '+ フォルダ追加', editNameHint: 'ダブルクリックで名前を変更', showHide: '表示/非表示', lockUnlock: 'ロック/解除', normalFade: '通常/フェード', moveUp: '上へ移動', moveDown: '下へ移動', deleteFolder: 'フォルダ削除', deleteLayer: 'レイヤー削除', objectSettings: 'オブジェクト設定', bringToFront: '最前面へ移動', sendToBack: '最後面へ移動', lockPosition: '位置を固定 (ドラッグ・選択無効)', customColorTitle: 'カスタムカラー', legendTitleLabel: '凡例タイトル', legendPlaceholder: '凡例説明', itemLabel: '項目', upload: 'アップロード', scaleSize: '拡大縮小', scaleSizeWidth: '拡大縮小 (幅)', rotationAngle: '回転', style: 'スタイル', gradient: 'グラデーション', thickRings: '太いリング', thinRings: '細いリング', dottedRings: 'ドットリング', radius: '半径', direction: '方向', titleTop: '上部タイトル', titleBottom: '下部サブタイトル', textContent: 'テキスト内容 (複数行対応)', fontSize: 'フォントサイズ', showBackgroundBox: '背景ボックスを表示', width: '幅', height: '高さ', strokeWidth: '線幅', segmentDivide: '線分割 (ノード再生成)', divide: '分割', arrowSize: '矢印サイズ', cornerRadius: '角丸 / 半径', lineStyle: '線種', lineSolid: '実線', lineDash: '破線', lineDashDense: '細かい破線', lineDashLong: '長い破線', lineDashDot: '点線', arrowStyle: '矢印スタイル', arrowStandard: '標準', arrowStealth: 'ステルス', arrowFlat: 'フラット', arrowCircle: 'サークル', multiArrow: '各セグメント矢印', doubleArrow: '両方向矢印', showArrow: '終端矢印を表示', fillOpacity: '背景不透明度', fillPattern: '塗りパターン', fillSolid: '実色', fillStripe: 'ストライプ', fillCrosshatch: 'クロスハッチ', fillDots: 'ドット', blendMode: 'ブレンドモード', blendNormal: '通常', blendMultiply: '乗算', blendScreen: 'スクリーン', blendOverlay: 'オーバーレイ', close: '閉じる', copy: 'コピー', paste: '貼り付け', arrayCopy: 'アレイ複製', pathArray: 'パス配列', pathArrayPromptSelect: 'パスとアイコンオブジェクトを選択してください。', pathArrayInvalidPath: '現在は連続点のパスのみ対応しています。', pathArrayCountPrompt: 'パスに沿って並べるアイコン数は？', alignTools: '整列ツール', zoneOperations: 'エリア操作', zoneUnion: '和集合', zoneIntersection: '交差', zoneDifference: '差分', mergeLines: '線を結合', noSelection: '選択なし', iconLibraryNoItems: 'まだカスタムアイコンがありません', iconLibraryUploadHint: 'SVGをアップロードして作成', uploadStart: 'アップロード開始', addToCanvas: '追加', uploadMore: 'さらにアップロード', smartFill: 'スマート塗りつぶし', smartFillDone: '✓ スマート塗りつぶしを適用しました', fillClosedArea: '閉領域を塗りつぶす', alertFillClosedAreaInvalid: '閉じた線分を選択してから塗りつぶしてください。', fillClosedAreaDone: '✓ 閉領域を塗りつぶしました', alertSmartFillNoTargets: '塗りつぶし対象がありません！', backup: 'バックアップ', download: 'ダウンロード', meterScaleLabel: '1m に対応するピクセル', scaleHint: '1メートルあたりのピクセル値を入力してスケールを補正します。', actualDistance: '実際距離 (mm)', setScaleFromMeasure: '測定からスケール設定', applyScale: 'スケール適用', currentScale: '現在のスケール', saveSnapshot: 'スナップショット保存', loadSnapshot: 'スナップショット切替', snapshot: 'スナップショット', customIconsStored: '✓ カスタムアイコン {count} 個保存済み', measureTitle: '測定ツール設定', pixelMmRatio: 'ピクセル/mm 比率', standardDpiHint: '標準96 DPI = 3.78 px/mm', clearMeasureResults: '測定結果をクリア', measurementResults: '測定結果', measureItem: '測定 {index}', helpTitle: 'ショートカットと操作', helpUndoRedo: '元に戻す / やり直し', helpGroupUngroup: 'グループ / グループ解除', helpMergeObjects: 'オブジェクト結合 (線/エリア)', helpDeleteObjects: 'オブジェクト削除', helpTempUnlock: '一時的にロック解除', helpSwitchTools: 'ツール切替 (前/次)', helpToggleSketch: 'スケッチモード切替', helpMultiSelect: '複数選択', helpDistribute: '等間隔配置', helpCanvasZoom: 'キャンバスズーム', helpContextMenu: 'コンテキストメニュー', helpAltClick: 'Alt を押し続ける', helpSelect3Plus: '3つ以上選択', helpCtrlWheel: 'Ctrl + ホイール', helpRightClick: '右クリック', helpButtonTitle: 'ショートカット説明', sopTitle: 'SOP 操作ガイド', sopStep1Title: '1. 基本操作', sopStep1Desc: '左側のツールバーから動線、エリア、アイコンなどを選択し、キャンバス上をクリックまたはドラッグしてオブジェクトを作成します。', sopStep2Title: '2. プロパティとスタイル', sopStep2Desc: '選択ツールでオブジェクトを選択すると、右下のパネルで色、線幅、破線、アイコンタイプを調整できます。', sopStep3Title: '3. ノード調整', sopStep3Desc: 'オブジェクトを選択すると白い制御点が表示され、ドラッグして形状を変えられます。曲線では灰色の制御点を使い、弧度を調整します。', sopStep4Title: '4. グループと整列', sopStep4Desc: '複数オブジェクトを選択してグループ化したり、上部ツールバーで水平/垂直等間隔に配置できます。', sopStep5Title: '5. 高度な演算', sopStep5Desc: '複数の動線を選択して結合し、複数のエリアを選択して和集合、交差、差分演算を行います。', sopStep6Title: '6. 配列複製', sopStep6Desc: 'オブジェクトを選択後に右クリックし、配列複製を選択すると等間隔のグリッドが簡単に作れます。', sopStep7Title: '7. スケッチスタイル', sopStep7Desc: '上部の手書きボタンをオンにすると、ラフなスケッチスタイルに切り替わります。', sopStep8Title: '8. 出力と凡例', sopStep8Desc: '完了したら凡例を生成し、SVG出力またはPNG出力でダウンロードします。', alertEmptyZoneResult: '操作結果が空の領域です！', alertGeometryFailed: '幾何学演算に失敗しました', alertLayerLocked: 'レイヤーがロックされています', defaultLeaderTop: 'タイトル', defaultLeaderBottom: '副題', defaultText: 'テキスト', alertSelectImageFile: '画像ファイルを選択してください', alertCustomIconUploaded: 'カスタムアイコンをアップロードしました: {iconName}', alertSelectValidSVG: '有効なSVGファイルを選択してください', alertImportedIcons: '{count} 個のカスタムアイコンをインポートしました', alertInvalidJSON: 'JSONファイル形式が無効です', alertSelectTwoZones: '❌ 2つ以上のゾーンを選択してください！\n選択済み: {count}\n\nヒント: 選択ツールを使ってゾーンを選択します', alertZoneSuccess: '✓ {operation} 操作に成功しました！', alertLegendNoVisible: '凡例を生成する可視オブジェクトがありません', iconToCanvas: '追加', categoryHuman: '人物', categoryVehicle: '乗物', categoryTree: '樹木', categoryCompass: 'コンパス', categoryLocationPin: '位置ピン', categoryScaleBar: '縮尺', defaultIconLabel: 'アイコン', labelArrow: '動線', labelSpline: '曲線', labelZone: 'ゾーン', labelCircleZone: '円形ゾーン', labelHighlight: '強調', labelRadiatingCircle: '影響範囲', labelObject: 'オブジェクト'      }
+        undo: '元に戻す', redo: 'やり直し', zoomOut: 'ズームアウト', zoomIn: 'ズームイン', resetView: 'リセット', noBackground: 'なし', dots: 'ドット', grid: 'グリッド', iso: 'アイソメ', snap: 'スナップ', sketch: '手描き', background: '背景', pasteImage: '画像', clearBackground: '背景削除', legend: '凡例', svg: 'SVG', png: 'PNG', dxf: 'DXF', pdf: 'PDF', iconLibrary: 'アイコン', delete: '削除', toggleSidebar: 'サイドバー切替', iconLibraryTitle: 'カスタムアイコン', group: 'グループ', ungroup: '解除', alignLeft: '左揃え', alignCenter: '中央揃え', alignRight: '右揃え', alignTop: '上揃え', alignBottom: '下揃え', moveHorizontal: '横分布', moveVertical: '縦分布', mirrorHorizontal: '水平ミラー', mirrorVertical: '垂直ミラー', measureAndGuides: '測定・補助線', measureHorizontal: '水平線', measureVertical: '垂直線', measure: '測定', pan: 'パン', select: '選択', eraser: '消しゴム', icon: 'アイコン', arrow: '動線', curveArrow: '曲線', solidLine: '直線', dashedLine: '点線', zone: '区画', circleZone: '円区画', highlight: '強調', road: '道路', node: '点', marker: 'マーカー', text: '文字', leaderText: 'リーダー', language: '言語', toggleToolbar: '左側ツールバー切替', newFile: '新規ファイル', iconCategory: 'アイコンカテゴリ', layersTitle: 'レイヤー管理', addLayer: '+ レイヤー追加', addFolder: '+ フォルダ追加', editNameHint: 'ダブルクリックで名前を変更', showHide: '表示/非表示', lockUnlock: 'ロック/解除', normalFade: '通常/フェード', moveUp: '上へ移動', moveDown: '下へ移動', deleteFolder: 'フォルダ削除', deleteLayer: 'レイヤー削除', objectSettings: 'オブジェクト設定', bringToFront: '最前面へ移動', sendToBack: '最後面へ移動', lockPosition: '位置を固定 (ドラッグ・選択無効)', customColorTitle: 'カスタムカラー', legendTitleLabel: '凡例タイトル', legendPlaceholder: '凡例説明', itemLabel: '項目', upload: 'アップロード', scaleSize: '拡大縮小', scaleSizeWidth: '拡大縮小 (幅)', rotationAngle: '回転', style: 'スタイル', gradient: 'グラデーション', thickRings: '太いリング', thinRings: '細いリング', dottedRings: 'ドットリング', radius: '半径', direction: '方向', titleTop: '上部タイトル', titleBottom: '下部サブタイトル', textContent: 'テキスト内容 (複数行対応)', fontSize: 'フォントサイズ', showBackgroundBox: '背景ボックスを表示', width: '幅', height: '高さ', strokeWidth: '線幅', segmentDivide: '線分割 (ノード再生成)', divide: '分割', arrowSize: '矢印サイズ', cornerRadius: '角丸 / 半径', lineStyle: '線種', lineSolid: '実線', lineDash: '破線', lineDashDense: '細かい破線', lineDashLong: '長い破線', lineDashDot: '点線', arrowStyle: '矢印スタイル', arrowStandard: '標準', arrowStealth: 'ステルス', arrowFlat: 'フラット', arrowCircle: 'サークル', multiArrow: '各セグメント矢印', doubleArrow: '両方向矢印', showArrow: '終端矢印を表示', fillOpacity: '背景不透明度', fillPattern: '塗りパターン', fillSolid: '実色', fillStripe: 'ストライプ', fillCrosshatch: 'クロスハッチ', fillDots: 'ドット', blendMode: 'ブレンドモード', blendNormal: '通常', blendMultiply: '乗算', blendScreen: 'スクリーン', blendOverlay: 'オーバーレイ', close: '閉じる', copy: 'コピー', paste: '貼り付け', arrayCopy: 'アレイ複製', pathArray: 'パス配列', pathArrayPromptSelect: 'パスとアイコンオブジェクトを選択してください。', pathArrayInvalidPath: '現在は連続点のパスのみ対応しています。', pathArrayCountPrompt: 'パスに沿って並べるアイコン数は？', alignTools: '整列ツール', zoneOperations: 'エリア操作', zoneUnion: '和集合', zoneIntersection: '交差', zoneDifference: '差分', mergeLines: '線を結合', noSelection: '選択なし', iconLibraryNoItems: 'まだカスタムアイコンがありません', iconLibraryUploadHint: 'SVGをアップロードして作成', uploadStart: 'アップロード開始', addToCanvas: '追加', uploadMore: 'さらにアップロード', smartFill: 'スマート塗りつぶし', smartFillDone: '✓ スマート塗りつぶしを適用しました', fillClosedArea: '閉領域を塗りつぶす', alertFillClosedAreaInvalid: '閉じた線分を選択してから塗りつぶしてください。', fillClosedAreaDone: '✓ 閉領域を塗りつぶしました', alertSmartFillNoTargets: '塗りつぶし対象がありません！', backup: 'バックアップ', download: 'ダウンロード', saveProject: 'プロジェクト保存', loadProject: 'プロジェクト読み込み', meterScaleLabel: '1m に対応するピクセル', scaleHint: '1メートルあたりのピクセル値を入力してスケールを補正します。', actualDistance: '実際距離 (mm)', setScaleFromMeasure: '測定からスケール設定', applyScale: 'スケール適用', currentScale: '現在のスケール', saveSnapshot: 'スナップショット保存', loadSnapshot: 'スナップショット切替', snapshot: 'スナップショット', customIconsStored: '✓ カスタムアイコン {count} 個保存済み', measureTitle: '測定ツール設定', pixelMmRatio: 'ピクセル/mm 比率', standardDpiHint: '標準96 DPI = 3.78 px/mm', clearMeasureResults: '測定結果をクリア', measurementResults: '測定結果', measureItem: '測定 {index}', helpTitle: 'ショートカットと操作', helpUndoRedo: '元に戻す / やり直し', helpGroupUngroup: 'グループ / グループ解除', helpMergeObjects: 'オブジェクト結合 (線/エリア)', helpDeleteObjects: 'オブジェクト削除', helpTempUnlock: '一時的にロック解除', helpSwitchTools: 'ツール切替 (前/次)', helpToggleSketch: 'スケッチモード切替', helpMultiSelect: '複数選択', helpDistribute: '等間隔配置', helpCanvasZoom: 'キャンバスズーム', helpContextMenu: 'コンテキストメニュー', helpAltClick: 'Alt を押し続ける', helpSelect3Plus: '3つ以上選択', helpCtrlWheel: 'Ctrl + ホイール', helpRightClick: '右クリック', helpButtonTitle: 'ショートカット説明', sopTitle: 'SOP 操作ガイド', sopStep1Title: '1. 基本操作', sopStep1Desc: '左側のツールバーから動線、エリア、アイコンなどを選択し、キャンバス上をクリックまたはドラッグしてオブジェクトを作成します。', sopStep2Title: '2. プロパティとスタイル', sopStep2Desc: '選択ツールでオブジェクトを選択すると、右下のパネルで色、線幅、破線、アイコンタイプを調整できます。', sopStep3Title: '3. ノード調整', sopStep3Desc: 'オブジェクトを選択すると白い制御点が表示され、ドラッグして形状を変えられます。曲線では灰色の制御点を使い、弧度を調整します。', sopStep4Title: '4. グループと整列', sopStep4Desc: '複数オブジェクトを選択してグループ化したり、上部ツールバーで水平/垂直等間隔に配置できます。', sopStep5Title: '5. 高度な演算', sopStep5Desc: '複数の動線を選択して結合し、複数のエリアを選択して和集合、交差、差分演算を行います。', sopStep6Title: '6. 配列複製', sopStep6Desc: 'オブジェクトを選択後に右クリックし、配列複製を選択すると等間隔のグリッドが簡単に作れます。', sopStep7Title: '7. スケッチスタイル', sopStep7Desc: '上部の手書きボタンをオンにすると、ラフなスケッチスタイルに切り替わります。', sopStep8Title: '8. 出力と凡例', sopStep8Desc: '完了したら凡例を生成し、SVG出力またはPNG出力でダウンロードします。', alertEmptyZoneResult: '操作結果が空の領域です！', alertGeometryFailed: '幾何学演算に失敗しました', alertLayerLocked: 'レイヤーがロックされています', defaultLeaderTop: 'タイトル', defaultLeaderBottom: '副題', defaultText: 'テキスト', alertSelectImageFile: '画像ファイルを選択してください', alertCustomIconUploaded: 'カスタムアイコンをアップロードしました: {iconName}', alertSelectValidSVG: '有効なSVGファイルを選択してください', alertImportedIcons: '{count} 個のカスタムアイコンをインポートしました', alertInvalidJSON: 'JSONファイル形式が無効です', alertSelectTwoZones: '❌ 2つ以上のゾーンを選択してください！\n選択済み: {count}\n\nヒント: 選択ツールを使ってゾーンを選択します', alertZoneSuccess: '✓ {operation} 操作に成功しました！', alertLegendNoVisible: '凡例を生成する可視オブジェクトがありません', iconToCanvas: '追加', categoryHuman: '人物', categoryVehicle: '乗物', categoryTree: '樹木', categoryCompass: 'コンパス', categoryLocationPin: '位置ピン', categoryScaleBar: '縮尺', defaultIconLabel: 'アイコン', labelArrow: '動線', labelSpline: '曲線', labelZone: 'ゾーン', labelCircleZone: '円形ゾーン', labelHighlight: '強調', labelRadiatingCircle: '影響範囲', labelObject: 'オブジェクト'      }
     };
 
     const showStartupError = (error) => {
@@ -744,8 +751,8 @@
       }
     }
 
-    const ToolBtn = ({ icon: Icon, langLabel, shortcut, active, onClick, iconClass, fillIcon, dashIcon }) => (
-      <button onClick={onClick} className={`relative group w-10 h-10 rounded-lg flex items-center justify-center transition-all ${active ? 'bg-gray-900 text-white shadow-md' : 'text-gray-400 hover:bg-gray-100 hover:text-gray-900'}`} title={shortcut ? `${langLabel} (${shortcut})` : langLabel}>
+    const ToolBtn = ({ icon: Icon, langLabel, shortcut, active, onClick, iconClass, fillIcon, dashIcon, disabled }) => (
+      <button onClick={disabled ? undefined : onClick} disabled={disabled} className={`relative group w-10 h-10 rounded-lg flex items-center justify-center transition-all ${disabled ? 'text-gray-300 cursor-not-allowed bg-gray-100' : active ? 'bg-gray-900 text-white shadow-md' : 'text-gray-400 hover:bg-gray-100 hover:text-gray-900'}`} title={shortcut ? `${langLabel} (${shortcut})` : langLabel}>
         <Icon size={18} className={iconClass} strokeDasharray={dashIcon ? '3 3' : undefined} fill={fillIcon ? 'currentColor' : 'none'} opacity={fillIcon ? 1 : 1} />
         <span className="absolute left-14 bg-gray-900 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-50 shadow-xl font-bold uppercase tracking-wider flex items-center gap-1.5">
           {langLabel} {shortcut && <span className="bg-gray-700 text-gray-300 px-1 py-0.5 rounded text-[8px] font-mono leading-none tracking-tighter">{shortcut}</span>}
@@ -797,12 +804,14 @@
       );
     };
 
-    const Toolbar = ({ activeTool, setActiveTool, activeColor, setActiveColor, setMeasurePoints, setMeasureResults, customIcons, svgInputRef, saveCustomIconLibrary, importCustomIconLibrary, handleFillAction, t, locale }) => (
-      <div className="w-16 bg-white border-r border-gray-200 flex flex-col items-center py-4 z-20 shrink-0 shadow-sm overflow-y-auto" style={{ scrollbarWidth: 'none' }}>
+    const Toolbar = ({ activeTool, setActiveTool, activeColor, setActiveColor, setMeasurePoints, setMeasureResults, customIcons, svgInputRef, saveCustomIconLibrary, importCustomIconLibrary, handleFillAction, t, locale, calibrationPending }) => (
+      <div className="relative w-16 bg-white border-r border-gray-200 flex flex-col items-center py-4 z-20 shrink-0 shadow-sm overflow-y-auto" style={{ scrollbarWidth: 'none' }}>
+        {calibrationPending && <div className="absolute inset-0 z-40 bg-white/0" />}
         <div className="bg-gray-900 text-white w-10 h-10 flex items-center justify-center rounded-xl mb-4 shadow-lg shrink-0"><span className="font-black text-xs">AP</span></div>
         <div className="space-y-1 w-full px-2 flex flex-col items-center">
           <ToolBtn icon={Lucide.Hand} langLabel={t('pan')} shortcut="Shift+H" active={activeTool === 'pan'} onClick={() => setActiveTool('pan')} />
           <ToolBtn icon={Lucide.MousePointer2} langLabel={t('select')} shortcut="Shift+V" active={activeTool === 'select'} onClick={() => setActiveTool('select')} />
+          <ToolBtn icon={Lucide.Eraser} langLabel={t('eraser')} shortcut="Shift+Q" active={activeTool === 'eraser'} onClick={() => setActiveTool('eraser')} />
           <ToolBtn icon={Lucide.Shapes} langLabel={t('icon')} shortcut="Shift+S" active={activeTool === 'icon_element'} onClick={() => setActiveTool('icon_element')} />
           <ToolBtnWithMenu 
             icon={Lucide.Ruler} 
@@ -858,107 +867,80 @@
     const HistBtn = ({ i: I, a, c, l }) => <button onClick={c} disabled={!a} className={`p-1.5 rounded transition-all ${a ? 'text-gray-700 hover:bg-white hover:shadow-sm' : 'text-gray-300 opacity-40 cursor-not-allowed'}`} title={l}><I size={14}/></button>;
     const HdrBtn = ({ i: I, t, c, p }) => <button onClick={c} className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-md text-xs font-semibold transition-all ${p ? 'bg-gray-900 text-white shadow-sm hover:bg-black' : 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-50'}`}><I size={14}/> <span>{t}</span></button>;
 
-    const Topbar = ({ snapEnabled, setSnapEnabled, isSketchMode, setIsSketchMode, gridType, setGridType, canUndo, canRedo, undo, redo, snapshots, saveSnapshot, loadSnapshot, handleMergeLines, handleZoneBoolean, handleSmartFill, handleFillClosedArea, generateLegend, exportSVG, exportPNG, exportDXF, exportPDF, selectedIds = [], setItems, commitHistory, canMergeLines, canMergeZones, onImportBg, onImportImageItem, clearBackground, bgImage, zoom, setZoom, setPan, canGroup, canUngroup, handleGroup, handleUngroup, handleAlign, canDistribute, handleDistribute, handleMirror, svgInputRef, saveCustomIconLibrary, importCustomIconLibrary, customIcons, setActiveTool, showRightPanel, setShowRightPanel, showToolbar = true, toggleToolbar = () => {}, topbarStage = 0, t, locale, setLocale, onNewFile }) => {
+    const Topbar = ({ snapEnabled, setSnapEnabled, isSketchMode, setIsSketchMode, gridType, setGridType, canUndo, canRedo, undo, redo, snapshots, saveSnapshot, loadSnapshot, handleMergeLines, handleZoneBoolean, handleSmartFill, handleFillClosedArea, generateLegend, exportSVG, exportPNG, exportDXF, exportPDF, selectedIds = [], setItems, commitHistory, canMergeLines, canMergeZones, onImportBg, onImportImageItem, onImportPdf, clearBackground, bgImage, zoom, setZoom, setPan, canGroup, canUngroup, handleGroup, handleUngroup, handleAlign, canDistribute, handleDistribute, handleMirror, svgInputRef, saveCustomIconLibrary, importCustomIconLibrary, saveProjectToFile, loadProjectFromFile, customIcons, setActiveTool, showRightPanel, setShowRightPanel, showToolbar = true, toggleToolbar = () => {}, topbarStage = 0, pdfPage = 1, pdfTotalPages = 0, onPdfPageChange = () => {}, pdfLoading = false, calibrationPending = false, t, locale, setLocale, onNewFile }) => {
       const [importMenuOpen, setImportMenuOpen] = useState(false);
       const [exportMenuOpen, setExportMenuOpen] = useState(false);
       return (
-      <div className="bg-white border-b border-gray-200 flex flex-col z-10 shrink-0">
-        <div className="h-10 flex items-center justify-between px-4 py-1 border-b border-gray-100">
-          <div className="flex items-center space-x-2 overflow-x-auto no-scrollbar">
-            <div className="flex bg-gray-50 rounded-lg p-0.5 border border-gray-200 shadow-sm shrink-0">
-              <HistBtn i={Lucide.Undo} a={canUndo} c={undo} l={t('undo')}/>
-              <HistBtn i={Lucide.Redo} a={canRedo} c={redo} l={t('redo')}/>
+      <div className="relative bg-white border-b border-gray-200 flex flex-col z-10 shrink-0">
+        {calibrationPending && <div className="absolute inset-0 z-40 bg-white/0" />}
+        <div className="flex flex-col gap-1 px-4 py-1 border-b border-gray-100">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-2 overflow-x-auto no-scrollbar">
+              <div className="flex bg-gray-50 rounded-lg p-0.5 border border-gray-200 shadow-sm shrink-0">
+                <HistBtn i={Lucide.Undo} a={canUndo} c={undo} l={t('undo')}/>
+                <HistBtn i={Lucide.Redo} a={canRedo} c={redo} l={t('redo')}/>
+              </div>
+              <button onClick={() => toggleToolbar()} className={`p-1 rounded-md transition-colors ${showToolbar ? 'text-gray-700 hover:bg-gray-100' : 'text-gray-400 hover:bg-gray-100'}`} title={t('toggleToolbar')}>
+                {showToolbar ? <Lucide.ChevronsLeft size={16}/> : <Lucide.ChevronsRight size={16}/>}
+              </button>
+              <button onClick={onNewFile} className="p-1.5 rounded-md text-gray-700 bg-white border border-gray-200 hover:bg-gray-50 transition" title={t('newFile')}>
+                <Lucide.FilePlus size={16}/>
+              </button>
+              <button onClick={saveProjectToFile} className="p-1.5 rounded-md text-gray-700 bg-white border border-gray-200 hover:bg-gray-50 transition" title={t('saveProject')}>
+                <Lucide.Save size={16}/>
+              </button>
+              <button onClick={loadProjectFromFile} className="p-1.5 rounded-md text-gray-700 bg-white border border-gray-200 hover:bg-gray-50 transition" title={t('loadProject')}>
+                <Lucide.FolderOpen size={16}/>
+              </button>
+              <div className="w-px h-4 bg-gray-200 shrink-0" />
+              <div className="flex bg-gray-50 rounded-lg p-0.5 border border-gray-200 shadow-sm items-center shrink-0">
+                <button onClick={()=>setZoom(z=>Math.max(0.1, z-0.1))} className="p-1 hover:bg-white rounded text-gray-700" title={t('zoomOut')}><Lucide.ZoomOut size={14}/></button>
+                <span className="text-[10px] font-bold px-1 w-9 text-center text-gray-700">{Math.round(zoom*100)}%</span>
+                <button onClick={()=>setZoom(z=>Math.min(5, z+0.1))} className="p-1 hover:bg-white rounded text-gray-700" title={t('zoomIn')}><Lucide.ZoomIn size={14}/></button>
+                <button onClick={()=>{setZoom(1); setPan({x:0,y:0});}} className="p-1 hover:bg-white rounded ml-0.5 text-gray-700" title={t('resetView')}><Lucide.Maximize size={14}/></button>
+              </div>
+              <div className="w-px h-4 bg-gray-200 shrink-0" />
+              <div className="flex bg-gray-50 rounded-lg p-0.5 border border-gray-200 shadow-sm items-center text-xs shrink-0">
+                <button onClick={()=>setGridType('none')} className={`px-2 py-1 rounded text-gray-600 font-semibold transition-all ${gridType==='none'?'bg-white shadow':''}`} title={t('noBackground')}>{t('noBackground')}</button>
+                <button onClick={()=>setGridType('dots')} className={`px-2 py-1 rounded text-gray-600 transition-all ${gridType==='dots'?'bg-white shadow text-blue-600':''}`} title={t('dots')}><Lucide.Grip size={14}/></button>
+                <button onClick={()=>setGridType('square')} className={`px-2 py-1 rounded text-gray-600 transition-all ${gridType==='square'?'bg-white shadow text-blue-600':''}`} title={t('grid')}><Lucide.Grid size={14}/></button>
+                <button onClick={()=>setGridType('iso')} className={`px-2 py-1 rounded text-gray-600 transition-all ${gridType==='iso'?'bg-white shadow text-blue-600':''}`} title={t('iso')}><Lucide.Hexagon size={14}/></button>
+              </div>
+              <div className="flex items-center rounded-lg border border-gray-200 bg-gray-50 shadow-sm p-0.5 shrink-0">
+                <button onClick={saveSnapshot} className="flex items-center space-x-1 px-2 py-1 text-xs font-semibold rounded text-gray-700 hover:bg-white" title={t('saveSnapshot')}><Lucide.Bookmark size={13}/><span className="hidden lg:inline">{t('saveSnapshot')}</span></button>
+                {snapshots.length > 0 && (
+                  <select defaultValue="" onChange={e => { if (!e.target.value) return; loadSnapshot(e.target.value); e.target.value = ''; }} className="text-[10px] bg-white border border-gray-200 rounded ml-1 px-2 py-1" title={t('loadSnapshot')}>
+                    <option value="">{t('loadSnapshot')}</option>
+                    {snapshots.map(s => <option key={s.id} value={s.id}>{s.name}</option>)}
+                  </select>
+                )}
+              </div>
             </div>
-            <button onClick={onNewFile} className="p-1.5 rounded-md text-gray-700 bg-white border border-gray-200 hover:bg-gray-50 transition" title={t('newFile')}>
-              <Lucide.FilePlus size={16}/>
-            </button>
-            <div className="w-px h-4 bg-gray-200 shrink-0" />
-            <div className="flex bg-gray-50 rounded-lg p-0.5 border border-gray-200 shadow-sm items-center shrink-0">
-               <button onClick={()=>setZoom(z=>Math.max(0.1, z-0.1))} className="p-1 hover:bg-white rounded text-gray-700" title={t('zoomOut')}><Lucide.ZoomOut size={14}/></button>
-               <span className="text-[10px] font-bold px-1 w-9 text-center text-gray-700">{Math.round(zoom*100)}%</span>
-               <button onClick={()=>setZoom(z=>Math.min(5, z+0.1))} className="p-1 hover:bg-white rounded text-gray-700" title={t('zoomIn')}><Lucide.ZoomIn size={14}/></button>
-               <button onClick={()=>{setZoom(1); setPan({x:0,y:0});}} className="p-1 hover:bg-white rounded ml-0.5 text-gray-700" title={t('resetView')}><Lucide.Maximize size={14}/></button>
+            <div className="flex items-center space-x-2 shrink-0">
+              <button onClick={()=>{setItems(prev=>prev.filter(i=>!selectedIds.includes(i.id))); if(commitHistory)commitHistory();}} disabled={selectedIds.length===0} className={`p-1 rounded-md transition-colors ${selectedIds.length>0 ? 'text-gray-500 hover:bg-red-50 hover:text-red-600' : 'text-gray-300 cursor-not-allowed'}`}><Lucide.Trash2 size={16}/></button>
+              <div className="w-px h-4 bg-gray-200 shrink-0" />
+              <div className="flex items-center space-x-1">
+                <button type="button" onClick={() => {
+                  const order = ['zh','en','ja'];
+                  const idx = order.indexOf(locale);
+                  setLocale(order[(idx + 1) % order.length]);
+                }} className={`w-10 h-8 rounded-full text-[10px] font-bold transition ${locale ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`} title={t('language')}>
+                  {LOCALE_LABELS[locale] || locale}
+                </button>
+              </div>
+              <div className="flex items-center space-x-1 pl-1 select-none text-[10px]"><span className="text-gray-900 font-black tracking-tight">ANALYTICAL</span><span className="bg-blue-600 text-white px-1 py-0.5 rounded text-[7px] font-black tracking-widest">PLANNER</span></div>
+              <button onClick={() => setShowRightPanel(!showRightPanel)} className={`p-1 rounded-md transition-colors ${showRightPanel ? 'text-gray-700 hover:bg-gray-100' : 'text-gray-400 hover:bg-gray-100'}`} title={t('toggleSidebar')}>
+                {showRightPanel ? <Lucide.ChevronsRight size={16}/> : <Lucide.ChevronsLeft size={16}/>}
+              </button>
             </div>
-            <div className="w-px h-4 bg-gray-200 shrink-0" />
-            
-            <div className="flex bg-gray-50 rounded-lg p-0.5 border border-gray-200 shadow-sm items-center text-xs shrink-0">
-              <button onClick={()=>setGridType('none')} className={`px-2 py-1 rounded text-gray-600 font-semibold transition-all ${gridType==='none'?'bg-white shadow':''}`} title={t('noBackground')}>{t('noBackground')}</button>
-              <button onClick={()=>setGridType('dots')} className={`px-2 py-1 rounded text-gray-600 transition-all ${gridType==='dots'?'bg-white shadow text-blue-600':''}`} title={t('dots')}><Lucide.Grip size={14}/></button>
-              <button onClick={()=>setGridType('square')} className={`px-2 py-1 rounded text-gray-600 transition-all ${gridType==='square'?'bg-white shadow text-blue-600':''}`} title={t('grid')}><Lucide.Grid size={14}/></button>
-              <button onClick={()=>setGridType('iso')} className={`px-2 py-1 rounded text-gray-600 transition-all ${gridType==='iso'?'bg-white shadow text-blue-600':''}`} title={t('iso')}><Lucide.Hexagon size={14}/></button>
-            </div>
-            <div className="flex items-center rounded-lg border border-gray-200 bg-gray-50 shadow-sm p-0.5 shrink-0">
-              <button onClick={saveSnapshot} className="flex items-center space-x-1 px-2 py-1 text-xs font-semibold rounded text-gray-700 hover:bg-white" title={t('saveSnapshot')}><Lucide.Bookmark size={13}/><span className="hidden lg:inline">{t('saveSnapshot')}</span></button>
-              {snapshots.length > 0 && (
-                <select defaultValue="" onChange={e => { if (!e.target.value) return; loadSnapshot(e.target.value); e.target.value = ''; }} className="text-[10px] bg-white border border-gray-200 rounded ml-1 px-2 py-1" title={t('loadSnapshot')}>
-                  <option value="">{t('loadSnapshot')}</option>
-                  {snapshots.map(s => <option key={s.id} value={s.id}>{s.name}</option>)}
-                </select>
-              )}
-            </div>
-            <button onClick={()=>setSnapEnabled(!snapEnabled)} className={`flex items-center space-x-1 px-2.5 py-1 rounded-md text-xs font-semibold transition-all shrink-0 ${snapEnabled ? 'bg-gray-900 text-white shadow-md' : 'bg-white text-gray-400 border border-gray-200 hover:bg-gray-50'}`} title={t('snap')}><Lucide.Magnet size={13}/><span className="hidden lg:inline text-[10px]">{t('snap')}</span></button>
-
-            <button onClick={()=>setIsSketchMode(!isSketchMode)} className={`flex items-center space-x-1 px-2.5 py-1 rounded-md text-xs font-semibold transition-all shrink-0 ${isSketchMode ? 'bg-purple-600 text-white shadow-md' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50'}`} title={`${t('sketch')} (Shift+K)`}><Lucide.Pencil size={13}/><span className="hidden lg:inline text-[10px]">{t('sketch')}</span></button>
           </div>
-          <div className="flex items-center space-x-2 shrink-0">
-            <div className="relative">
-              <button onClick={() => setImportMenuOpen(prev => !prev)} className="flex items-center space-x-1.5 px-3 py-1.5 rounded-md text-xs font-semibold transition-all bg-white text-gray-700 border border-gray-200 hover:bg-gray-50">
-                <Lucide.ImageIcon size={14}/>
-                <span>{t('background')}</span>
-                <Lucide.ChevronDown size={12}/>
-              </button>
-              {importMenuOpen && (
-                <div className="absolute left-0 mt-1 w-40 rounded-xl border border-gray-200 bg-white shadow-lg overflow-hidden z-50">
-                  <button onClick={() => { onImportBg(); setImportMenuOpen(false); }} className="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-50">{t('background')}</button>
-                  <button onClick={() => { onImportImageItem(); setImportMenuOpen(false); }} className="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-50">{t('pasteImage')}</button>
-                </div>
-              )}
-            </div>
-            {bgImage && <HdrBtn i={Lucide.Trash2} t={t('clearBackground')} c={clearBackground} />}
-            <HdrBtn i={Lucide.List} t={t('legend')} c={generateLegend}/>
-            <div className="relative">
-              <button type="button" onClick={() => setExportMenuOpen(prev => !prev)} className="flex items-center space-x-1.5 px-3 py-1.5 rounded-md text-xs font-semibold transition-all bg-white text-gray-700 border border-gray-200 hover:bg-gray-50">
-                <Lucide.Download size={14}/>
-                <span>{t('download')}</span>
-                <Lucide.ChevronDown size={12}/>
-              </button>
-              {exportMenuOpen && (
-                <div className="absolute left-0 mt-1 w-40 rounded-xl border border-gray-200 bg-white shadow-lg overflow-hidden z-50">
-                  <button type="button" onClick={() => { exportSVG(); setExportMenuOpen(false); }} className="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-50">{t('svg')}</button>
-                  <button type="button" onClick={() => { exportPNG(); setExportMenuOpen(false); }} className="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-50">{t('png')}</button>
-                  <button type="button" onClick={() => { exportDXF(); setExportMenuOpen(false); }} className="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-50">{t('dxf')}</button>
-                  <button type="button" onClick={() => { exportPDF(); setExportMenuOpen(false); }} className="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-50">{t('pdf')}</button>
-                </div>
-              )}
-            </div>
-            <div className="w-px h-4 bg-gray-200 shrink-0" />
-            <button onClick={() => setActiveTool('icon_library')} className={`flex items-center space-x-1 px-2.5 py-1 rounded-md text-xs font-semibold transition-all ${Object.keys(customIcons).length > 0 ? 'bg-blue-100 text-blue-700 border border-blue-300 hover:bg-blue-200' : 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-50'}`} title={t('iconLibraryTitle')}>
-              <Lucide.Palette size={13}/>
-              <span className="hidden lg:inline">{t('iconLibrary')}</span>
-              {Object.keys(customIcons).length > 0 && <span className="bg-blue-600 text-white rounded-full w-4 h-4 flex items-center justify-center text-[8px] font-bold">{Object.keys(customIcons).length}</span>}
-            </button>
-            <button onClick={()=>{setItems(prev=>prev.filter(i=>!selectedIds.includes(i.id))); if(commitHistory)commitHistory();}} disabled={selectedIds.length===0} className={`p-1 rounded-md transition-colors ${selectedIds.length>0 ? 'text-gray-500 hover:bg-red-50 hover:text-red-600' : 'text-gray-300 cursor-not-allowed'}`}><Lucide.Trash2 size={16}/></button>
-            <button onClick={() => toggleToolbar()} className={`p-1 rounded-md transition-colors ${showToolbar ? 'text-gray-700 hover:bg-gray-100' : 'text-gray-400 hover:bg-gray-100'}`} title={t('toggleToolbar')}>
-              {showToolbar ? <Lucide.ChevronsLeft size={16}/> : <Lucide.ChevronsRight size={16}/>}
-            </button>
-            <button onClick={() => setShowRightPanel(!showRightPanel)} className={`p-1 rounded-md transition-colors ${showRightPanel ? 'text-gray-700 hover:bg-gray-100' : 'text-gray-400 hover:bg-gray-100'}`} title={t('toggleSidebar')}><Lucide.PanelRightOpen size={16}/></button>
-            <div className="w-px h-4 bg-gray-200 shrink-0" />
-            <div className="flex items-center space-x-1">
-              <button type="button" onClick={() => {
-                const order = ['zh','en','ja'];
-                const idx = order.indexOf(locale);
-                setLocale(order[(idx + 1) % order.length]);
-              }} className={`w-10 h-8 rounded-full text-[10px] font-bold transition ${locale ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`} title={t('language')}>
-                {LOCALE_LABELS[locale] || locale}
-              </button>
-            </div>
-            <div className="flex items-center space-x-1 pl-1 select-none text-[10px]"><span className="text-gray-900 font-black tracking-tight">ANALYTICAL</span><span className="bg-blue-600 text-white px-1 py-0.5 rounded text-[7px] font-black tracking-widest">PLANNER</span></div>
+          <div className="flex items-center justify-end space-x-2">
           </div>
         </div>
         
         {topbarStage === 0 && (
-          <div className="h-10 flex items-center justify-between px-4 py-1">
-            <div className="flex items-center space-x-2 overflow-x-auto no-scrollbar">
+          <div className="flex items-center justify-between px-4 py-2 min-h-[40px]">
+            <div className="flex items-center gap-2 flex-wrap">
               {canGroup && (
                 <>
                   <div className="flex bg-gray-50 rounded-lg p-0.5 border border-gray-200 shadow-sm items-center shrink-0">
@@ -974,6 +956,60 @@
                 </>
               )}
               {canUngroup && <HdrBtn i={Lucide.PackageOpen} t={t('ungroup')} c={handleUngroup}/>}
+              <div className="w-px h-4 bg-gray-200 shrink-0" />
+              <div className="flex items-center space-x-2 shrink-0">
+                <div className="relative z-50">
+                  <button type="button" onClick={() => setImportMenuOpen(prev => !prev)} className="flex items-center space-x-1.5 px-3 py-1.5 rounded-md text-xs font-semibold transition-all bg-white text-gray-700 border border-gray-200 hover:bg-gray-50">
+                    <Lucide.ImageIcon size={14}/>
+                    <span>{t('background')}</span>
+                    <Lucide.ChevronDown size={12}/>
+                  </button>
+                  {importMenuOpen && (
+                    <div className="absolute left-0 mt-1 w-40 rounded-xl border border-gray-200 bg-white shadow-lg overflow-hidden z-[9999]">
+                      <button type="button" onClick={() => { onImportBg(); setImportMenuOpen(false); }} className="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-50">{t('background')}</button>
+                      <button type="button" onClick={() => { onImportImageItem(); setImportMenuOpen(false); }} className="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-50">{t('pasteImage')}</button>
+                      <button type="button" onClick={() => { onImportPdf?.(); setImportMenuOpen(false); }} className="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-50">{t('pdf')}</button>
+                    </div>
+                  )}
+                </div>
+                {bgImage && <HdrBtn i={Lucide.Trash2} t={t('clearBackground')} c={clearBackground} />}
+                <HdrBtn i={Lucide.List} t={t('legend')} c={generateLegend}/>
+                {pdfTotalPages > 0 && (
+                  <div className="flex items-center gap-1 rounded-xl border border-gray-200 bg-white px-2 py-1 text-xs text-gray-700">
+                    <button type="button" onClick={() => onPdfPageChange(Math.max(1, pdfPage - 1))} disabled={pdfLoading || pdfPage <= 1} className="w-7 h-7 rounded hover:bg-gray-100 disabled:text-gray-300 disabled:hover:bg-transparent">
+                      <Lucide.ChevronLeft size={14} />
+                    </button>
+                    <span className="whitespace-nowrap">Page {pdfPage} / {pdfTotalPages}</span>
+                    <button type="button" onClick={() => onPdfPageChange(Math.min(pdfTotalPages, pdfPage + 1))} disabled={pdfLoading || pdfPage >= pdfTotalPages} className="w-7 h-7 rounded hover:bg-gray-100 disabled:text-gray-300 disabled:hover:bg-transparent">
+                      <Lucide.ChevronRight size={14} />
+                    </button>
+                  </div>
+                )}
+                <div className="relative z-50">
+                  <button type="button" onClick={() => setExportMenuOpen(prev => !prev)} className="flex items-center space-x-1.5 px-3 py-1.5 rounded-md text-xs font-semibold transition-all bg-white text-gray-700 border border-gray-200 hover:bg-gray-50">
+                    <Lucide.Download size={14}/>
+                    <span>{t('download')}</span>
+                    <Lucide.ChevronDown size={12}/>
+                  </button>
+                  {exportMenuOpen && (
+                    <div className="absolute left-0 mt-1 w-40 rounded-xl border border-gray-200 bg-white shadow-lg overflow-hidden z-[9999]">
+                      <button type="button" onClick={() => { exportSVG(); setExportMenuOpen(false); }} className="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-50">{t('svg')}</button>
+                      <button type="button" onClick={() => { exportPNG(); setExportMenuOpen(false); }} className="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-50">{t('png')}</button>
+                      <button type="button" onClick={() => { exportDXF(); setExportMenuOpen(false); }} className="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-50">{t('dxf')}</button>
+                      <button type="button" onClick={() => { exportPDF(); setExportMenuOpen(false); }} className="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-50">{t('pdf')}</button>
+                    </div>
+                  )}
+                </div>
+                <button onClick={() => setActiveTool('icon_library')} className={`flex items-center space-x-1 px-2.5 py-1 rounded-md text-xs font-semibold transition-all ${Object.keys(customIcons).length > 0 ? 'bg-blue-100 text-blue-700 border border-blue-300 hover:bg-blue-200' : 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-50'}`} title={t('iconLibraryTitle')}>
+                  <Lucide.Palette size={13}/>
+                  <span className="hidden lg:inline">{t('iconLibrary')}</span>
+                  {Object.keys(customIcons).length > 0 && <span className="bg-blue-600 text-white rounded-full w-4 h-4 flex items-center justify-center text-[8px] font-bold">{Object.keys(customIcons).length}</span>}
+                </button>
+                <button onClick={()=>setIsSketchMode(!isSketchMode)} className={`flex items-center space-x-1 px-2.5 py-1 rounded-md text-xs font-semibold transition-all ${isSketchMode ? 'bg-purple-600 text-white shadow-md' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50'}`} title={`${t('sketch')} (Shift+K)`}>
+                  <Lucide.Pencil size={13}/>
+                  <span className="hidden lg:inline">{t('sketch')}</span>
+                </button>
+              </div>
               
               {canDistribute && (
                 <>
@@ -1364,7 +1400,7 @@
       );
     };
 
-    const Canvas = ({ items, setItems, selectedIds, setSelectedIds, activeTool, setActiveTool, activeColor, setActiveColor, snapEnabled, gridType, isSketchMode, layers, activeLayerId, bgImage, commitHistory, pan, setPan, zoom, setZoom, canGroup, canUngroup, handleGroup, handleUngroup, measurePoints, setMeasurePoints, measureResults, setMeasureResults, pixelsPerMm, handleAlign, handleDistribute, handleMergeLines, handleZoneBoolean, customIcons, t }) => {
+    const Canvas = ({ items, setItems, selectedIds, setSelectedIds, activeTool, setActiveTool, activeColor, setActiveColor, snapEnabled, gridType, isSketchMode, layers, activeLayerId, bgImage, commitHistory, pan, setPan, zoom, setZoom, canGroup, canUngroup, handleGroup, handleUngroup, measurePoints, setMeasurePoints, measureResults, setMeasureResults, pixelsPerMm, handleAlign, handleDistribute, handleMergeLines, handleZoneBoolean, pdfCalibrationPending, calibrationLineId, setCalibrationLineId, setCalibrationLineLengthPx, customIcons, t }) => {
       const [isD, setIsD] = useState(false), [isDr, setIsDr] = useState(false), [dH, setDH] = useState(null);
       const [lMP, setLMP] = useState({x:0, y:0}), [sB, setSB] = useState(null), [sG, setSG] = useState({x:null,y:null});
       const pointersRef = useRef(new Map());
@@ -1504,11 +1540,31 @@
           pointersRef.current.clear();
           setGestureActive(false);
         }
+        if (e.pointerType === 'touch') {
+          pointersRef.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
+          if (pointersRef.current.size >= 2) {
+            const pts = Array.from(pointersRef.current.values());
+            const center = { x: (pts[0].x + pts[1].x) / 2, y: (pts[0].y + pts[1].y) / 2 };
+            const distance = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y);
+            gestureRef.current = { startZoom: zoom, startPan: pan, startCenter: center, startDistance: distance };
+            setGestureActive(true);
+            setIsD(false);
+            setIsDr(false);
+            setDH(null);
+            setSB(null);
+            setSG({x:null,y:null});
+            if (e.target.setPointerCapture) e.target.setPointerCapture(e.pointerId);
+            return;
+          }
+        }
         if (e.pointerType === 'touch' || e.pointerType === 'pen') e.preventDefault();
         if(e.target.setPointerCapture) e.target.setPointerCapture(e.pointerId);
 
         if(cm) setCm(null);
         if(activeTool==='pan') { setIsDr(true); setLMP({x: e.clientX, y: e.clientY}); return; }
+        if (pdfCalibrationPending && activeTool !== 'solid_line' && activeTool !== 'select') {
+          return;
+        }
         let {x,y} = getP(e);
 
         if (snapEnabled && !e.altKey && gridType !== 'none') {
@@ -1534,8 +1590,23 @@
           const baseStrokeWidth = activeTool==='road'?16:(activeTool==='solid_line'||activeTool==='dashed_line'?3:4);
           const strokeWidth = getPressureStrokeWidth(e.pressure, baseStrokeWidth, e.tiltX, e.tiltY);
           penBaseStrokeWidthRef.current = baseStrokeWidth;
+          let nextItems = items;
+          if (pdfCalibrationPending && activeTool === 'solid_line' && calibrationLineId) {
+            nextItems = items.filter(i => i.id !== calibrationLineId);
+            setCalibrationLineId(null);
+            setCalibrationLineLengthPx(null);
+          }
           const n = {id:Date.now(), type:activeTool, points:[{x,y}, {x,y}], color:activeColor, layerId:activeLayerId, strokeWidth, dashPattern:(activeTool==='dashed_arrow'||activeTool==='dashed_line')?'8 6':'none', cornerRadius: activeTool==='spline'?30:0, showArrow: false};
-          setItems([...items, n]); setSelectedIds([n.id]);
+          setItems([...nextItems, n]); setSelectedIds([n.id]);
+          if (pdfCalibrationPending && activeTool === 'solid_line') {
+            setCalibrationLineId(n.id);
+          }
+        } else if(activeTool==='eraser') {
+          if (tId) {
+            setItems(items.filter(i => i.id !== tId));
+            setSelectedIds([]);
+            if (commitHistory) commitHistory();
+          }
         } else if(activeTool==='leader_text') {
           setIsD(true); const n = {id:Date.now(), type:'leader_text', points:[{x,y},{x:x+50,y:y-50}], color:activeColor, layerId:activeLayerId, textTop:'標題', textBottom:'副標'};
           setItems([...items, n]); setSelectedIds([n.id]);
@@ -2275,27 +2346,30 @@
               {selectedIds.length===1 && activeTool==='select' && (() => {
                 const it = items.find(i=>i.id===selectedIds[0]); if(!it) return null;
                 const md = (e,h) => {e.stopPropagation(); setDH(h);};
+                const visualRadius = 5 / zoom;
+                const hitAreaRadius = 22 / zoom;
+                const handleStroke = 1.5 / zoom;
                 return <g className="export-ignore">
                   {it.points?.map((p,i)=>(
                     <g key={`p-${i}`}>
-                      <circle cx={p.x} cy={p.y} r="22" fill="rgba(0,0,0,0.01)" pointerEvents="all" className="export-ignore" onPointerDown={e=>md(e,{t:'pt',i})} />
-                      <circle cx={p.x} cy={p.y} r="5" fill="white" stroke="#000" onPointerDown={e=>md(e,{t:'pt',i})} />
+                      <circle cx={p.x} cy={p.y} r={hitAreaRadius} fill="rgba(0,0,0,0.01)" pointerEvents="all" className="export-ignore" onPointerDown={e=>md(e,{t:'pt',i})} />
+                      <circle cx={p.x} cy={p.y} r={visualRadius} fill="white" stroke="#000" strokeWidth={handleStroke} onPointerDown={e=>md(e,{t:'pt',i})} />
                     </g>
                   ))}
                   {it.type==='zone'&&GeometryUtils.getZoneSubPaths(it).map((pl,pi)=>(
                     <g key={pi}>
                       {pl.map((p,pti)=>(
                         <g key={`${pi}-${pti}`}>
-                          <circle cx={p.x} cy={p.y} r="22" fill="rgba(0,0,0,0.01)" pointerEvents="all" className="export-ignore" onPointerDown={e=>md(e,{t:'zpt',pi,pti})} />
-                          <circle cx={p.x} cy={p.y} r="5" fill="white" stroke="#000" onPointerDown={e=>md(e,{t:'zpt',pi,pti})} />
+                          <circle cx={p.x} cy={p.y} r={hitAreaRadius} fill="rgba(0,0,0,0.01)" pointerEvents="all" className="export-ignore" onPointerDown={e=>md(e,{t:'zpt',pi,pti})} />
+                          <circle cx={p.x} cy={p.y} r={visualRadius} fill="white" stroke="#000" strokeWidth={handleStroke} onPointerDown={e=>md(e,{t:'zpt',pi,pti})} />
                         </g>
                       ))}
                     </g>
                   ))}
                   {(it.type==='highlight' || it.type === 'radiating_circle' || it.type==='circle_zone')&&(
                     <g>
-                      <circle cx={it.cx+it.r} cy={it.cy} r="22" fill="rgba(0,0,0,0.01)" pointerEvents="all" className="export-ignore" onPointerDown={e=>md(e,'r')} />
-                      <circle cx={it.cx+it.r} cy={it.cy} r="5" fill="white" stroke="#3b82f6" onPointerDown={e=>md(e,'r')} />
+                      <circle cx={it.cx+it.r} cy={it.cy} r={hitAreaRadius} fill="rgba(0,0,0,0.01)" pointerEvents="all" className="export-ignore" onPointerDown={e=>md(e,'r')} />
+                      <circle cx={it.cx+it.r} cy={it.cy} r={visualRadius} fill="white" stroke="#3b82f6" strokeWidth={handleStroke} onPointerDown={e=>md(e,'r')} />
                     </g>
                   )}
                   {it.type==='curve_arrow'&&(() => {
@@ -2303,16 +2377,16 @@
                     let cy = it.cy ?? (Math.abs(it.x2 - it.x1) > Math.abs(it.y2 - it.y1) ? it.y2 : it.y1);
                     return <>
                       <g key="start">
-                        <circle cx={it.x1} cy={it.y1} r="22" fill="rgba(0,0,0,0.01)" pointerEvents="all" className="export-ignore" onPointerDown={e=>md(e,'s')} />
-                        <circle cx={it.x1} cy={it.y1} r="5" fill="white" stroke="#000" onPointerDown={e=>md(e,'s')} />
+                        <circle cx={it.x1} cy={it.y1} r={hitAreaRadius} fill="rgba(0,0,0,0.01)" pointerEvents="all" className="export-ignore" onPointerDown={e=>md(e,'s')} />
+                        <circle cx={it.x1} cy={it.y1} r={visualRadius} fill="white" stroke="#000" strokeWidth={handleStroke} onPointerDown={e=>md(e,'s')} />
                       </g>
                       <g key="center">
-                        <circle cx={cx} cy={cy} r="22" fill="rgba(0,0,0,0.01)" pointerEvents="all" className="export-ignore" onPointerDown={e=>md(e,'c')} />
-                        <circle cx={cx} cy={cy} r="5" fill="white" stroke="#999" onPointerDown={e=>md(e,'c')} />
+                        <circle cx={cx} cy={cy} r={hitAreaRadius} fill="rgba(0,0,0,0.01)" pointerEvents="all" className="export-ignore" onPointerDown={e=>md(e,'c')} />
+                        <circle cx={cx} cy={cy} r={visualRadius} fill="white" stroke="#999" strokeWidth={handleStroke} onPointerDown={e=>md(e,'c')} />
                       </g>
                       <g key="end">
-                        <circle cx={it.x2} cy={it.y2} r="22" fill="rgba(0,0,0,0.01)" pointerEvents="all" className="export-ignore" onPointerDown={e=>md(e,'e')} />
-                        <circle cx={it.x2} cy={it.y2} r="5" fill="white" stroke="#000" onPointerDown={e=>md(e,'e')} />
+                        <circle cx={it.x2} cy={it.y2} r={hitAreaRadius} fill="rgba(0,0,0,0.01)" pointerEvents="all" className="export-ignore" onPointerDown={e=>md(e,'e')} />
+                        <circle cx={it.x2} cy={it.y2} r={visualRadius} fill="white" stroke="#000" strokeWidth={handleStroke} onPointerDown={e=>md(e,'e')} />
                       </g>
                     </>;
                   })()}
@@ -2437,6 +2511,66 @@
 
       const hm = useRef(null);
       const fileInputRef = useRef(null);
+      const floatingMenuRef = useRef(null);
+      const [floatingMenuPos, setFloatingMenuPos] = useState({ x: null, y: null });
+      const floatingDragRef = useRef({ pointerId: null, originX: 0, originY: 0, startX: 0, startY: 0 });
+      const pdfInputRef = useRef(null);
+      const [pdfDoc, setPdfDoc] = useState(null);
+      const [pdfPage, setPdfPage] = useState(1);
+      const [pdfTotalPages, setPdfTotalPages] = useState(0);
+      const [pdfLoading, setPdfLoading] = useState(false);
+      const [pdfError, setPdfError] = useState(null);
+      const [pdfCalibrationPending, setPdfCalibrationPending] = useState(false);
+      const [calibrationLineId, setCalibrationLineId] = useState(null);
+      const [calibrationLineLengthPx, setCalibrationLineLengthPx] = useState(null);
+      const [calibrationLengthInput, setCalibrationLengthInput] = useState('');
+      const [calibrationError, setCalibrationError] = useState('');
+
+      useEffect(() => {
+        if (!calibrationLineId) {
+          setCalibrationLineLengthPx(null);
+          return;
+        }
+        const current = items.find(i => i.id === calibrationLineId);
+        if (!current || !current.points || current.points.length < 2) {
+          setCalibrationLineLengthPx(null);
+          return;
+        }
+        const [a, b] = current.points;
+        const length = Math.hypot(b.x - a.x, b.y - a.y);
+        setCalibrationLineLengthPx(length);
+      }, [items, calibrationLineId]);
+
+      const handleFloatingMenuPointerDown = (e) => {
+        if (e.target?.closest('button')) return;
+        if (!floatingMenuRef.current) return;
+        const rect = floatingMenuRef.current.getBoundingClientRect();
+        e.currentTarget.setPointerCapture(e.pointerId);
+        const startX = floatingMenuPos.x != null ? floatingMenuPos.x : rect.left;
+        const startY = floatingMenuPos.y != null ? floatingMenuPos.y : rect.top;
+        floatingDragRef.current = { pointerId: e.pointerId, originX: e.clientX, originY: e.clientY, startX, startY };
+        setFloatingMenuPos({ x: startX, y: startY });
+      };
+
+      const handleFloatingMenuPointerMove = (e) => {
+        const drag = floatingDragRef.current;
+        if (!drag || drag.pointerId !== e.pointerId) return;
+        if (!floatingMenuRef.current) return;
+        const width = floatingMenuRef.current.offsetWidth;
+        const height = floatingMenuRef.current.offsetHeight;
+        const nextX = drag.startX + (e.clientX - drag.originX);
+        const nextY = drag.startY + (e.clientY - drag.originY);
+        const boundedX = Math.min(Math.max(8, nextX), window.innerWidth - width - 8);
+        const boundedY = Math.min(Math.max(8, nextY), window.innerHeight - height - 8);
+        setFloatingMenuPos({ x: boundedX, y: boundedY });
+      };
+
+      const handleFloatingMenuPointerUp = (e) => {
+        const drag = floatingDragRef.current;
+        if (!drag || drag.pointerId !== e.pointerId) return;
+        e.currentTarget.releasePointerCapture(e.pointerId);
+        floatingDragRef.current = { pointerId: null, originX: 0, originY: 0, startX: 0, startY: 0 };
+      };
 
       useEffect(() => {
         safeSetLocalStorage('locale', locale);
@@ -2540,6 +2674,7 @@
       };
       const svgInputRef = useRef(null);
       const imageItemInputRef = useRef(null);
+      const projectFileInputRef = useRef(null);
 
       const getProjectPayload = () => ({
         items,
@@ -2554,7 +2689,8 @@
         scaleLabel,
         snapEnabled,
         gridType,
-        isSketchMode
+        isSketchMode,
+        customIcons
       });
 
       if(!hm.current) hm.current = new HistoryManager(setItems, setCanUndo, setCanRedo, setSelectedIds);
@@ -2589,6 +2725,142 @@
           reader.readAsDataURL(file);
         }
         e.target.value = '';
+      };
+
+      const renderPdfPageToBg = async (pdf, pageNumber) => {
+        try {
+          const page = await pdf.getPage(pageNumber);
+          const viewport = page.getViewport({ scale: 2.5 });
+          const canvas = document.createElement('canvas');
+          const context = canvas.getContext('2d');
+          canvas.width = Math.round(viewport.width);
+          canvas.height = Math.round(viewport.height);
+          const renderTask = page.render({ canvasContext: context, viewport });
+          await renderTask.promise;
+          const dataUrl = canvas.toDataURL('image/png');
+          setBgImage(dataUrl);
+          return dataUrl;
+        } catch (err) {
+          console.error('PDF render failed', err);
+          setPdfError('PDF render failed');
+          return null;
+        }
+      };
+
+      const loadPdfFile = async (file) => {
+        if (!file) return;
+        if (file.type !== 'application/pdf' && !file.name.toLowerCase().endsWith('.pdf')) {
+          alert('請選擇 PDF 檔案');
+          return;
+        }
+        setPdfError(null);
+        setPdfLoading(true);
+        try {
+          const pdfjs = window.pdfjsLib || window['pdfjs-dist/build/pdf'];
+          if (!pdfjs || typeof pdfjs.getDocument !== 'function') {
+            throw new Error('PDF.js is not loaded or unavailable. Check CDN connection.');
+          }
+          pdfjs.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+          
+          const fileUrl = URL.createObjectURL(file);
+          const loadingTask = pdfjs.getDocument({ url: fileUrl });
+          const pdf = await loadingTask.promise;
+          setPdfDoc(pdf);
+          setPdfTotalPages(pdf.numPages);
+          setPdfPage(1);
+          setPdfCalibrationPending(true);
+          setCalibrationLineId(null);
+          setCalibrationLineLengthPx(null);
+          setCalibrationLengthInput('');
+          setCalibrationError('');
+          setActiveTool('solid_line');
+          await renderPdfPageToBg(pdf, 1);
+        } catch (err) {
+          console.error('Failed to load PDF', err);
+          setPdfError('PDF load failed');
+          alert('PDF 讀取失敗，請重新上傳\n詳細錯誤: ' + err.message);
+        } finally {
+          setPdfLoading(false);
+        }
+      };
+
+      const handlePdfPageChange = async (pageNumber) => {
+        if (!pdfDoc || pageNumber < 1 || pageNumber > pdfTotalPages) return;
+        setPdfPage(pageNumber);
+        setPdfLoading(true);
+        await renderPdfPageToBg(pdfDoc, pageNumber);
+        setPdfLoading(false);
+      };
+
+      const handlePdfUpload = async (e) => {
+        const file = e.target.files?.[0];
+        if (!file) {
+          return;
+        }
+        await loadPdfFile(file);
+        e.target.value = '';
+      };
+
+      const handlePdfDrop = async (file) => {
+        if (!file) return;
+        await loadPdfFile(file);
+      };
+
+      useEffect(() => {
+        const onDragOver = (event) => {
+          event.preventDefault();
+          if (event.dataTransfer) event.dataTransfer.dropEffect = 'copy';
+        };
+        const onDrop = async (event) => {
+          event.preventDefault();
+          const file = event.dataTransfer?.files?.[0];
+          if (!file) return;
+          if (file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf')) {
+            await handlePdfDrop(file);
+          }
+        };
+        window.addEventListener('dragover', onDragOver);
+        window.addEventListener('drop', onDrop);
+        return () => {
+          window.removeEventListener('dragover', onDragOver);
+          window.removeEventListener('drop', onDrop);
+        };
+      }, []);
+
+      const handleCalibrationConfirm = () => {
+        const actual = parseFloat(calibrationLengthInput);
+        const currentCalibrationId = calibrationLineId;
+        if (!calibrationLineLengthPx || !currentCalibrationId) {
+          setCalibrationError('請先繪製一條校正線段');
+          return;
+        }
+        if (!actual || actual <= 0) {
+          setCalibrationError('請輸入有效的已知長度');
+          return;
+        }
+        const newScale = calibrationLineLengthPx / actual;
+        setPixelsPerMm(newScale);
+        setPdfCalibrationPending(false);
+        setCalibrationLineId(null);
+        setCalibrationLineLengthPx(null);
+        setCalibrationLengthInput('');
+        setCalibrationError('');
+        setActiveTool('select');
+        setSelectedIds([]);
+        setItems(prev => prev.filter(i => i.id !== currentCalibrationId));
+        if (commitHistory) commitHistory();
+      };
+
+      const resetCalibrationLine = () => {
+        if (calibrationLineId) {
+          const currentCalibrationId = calibrationLineId;
+          setItems(prev => prev.filter(i => i.id !== currentCalibrationId));
+        }
+        setCalibrationLineId(null);
+        setCalibrationLineLengthPx(null);
+        setCalibrationLengthInput('');
+        setCalibrationError('');
+        setActiveTool('solid_line');
       };
 
       const handleImageItemUpload = (e) => {
@@ -2687,6 +2959,70 @@
           };
           reader.readAsText(file);
         }
+      };
+
+      const saveProjectToFile = () => {
+        const dataStr = JSON.stringify(getProjectPayload(), null, 2);
+        const blob = new Blob([dataStr], { type: 'application/json;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `analytical-planner-${new Date().toISOString().slice(0,10)}.json`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+      };
+
+      const loadProjectFromFile = () => {
+        if (projectFileInputRef.current) projectFileInputRef.current.click();
+      };
+
+      const handleProjectUpload = (e) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+        if (!(file.type.includes('json') || file.name.toLowerCase().endsWith('.json'))) {
+          alert('請選擇 JSON 檔案');
+          e.target.value = '';
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          try {
+            const data = JSON.parse(event.target.result);
+            if (!data || !Array.isArray(data.items)) throw new Error('Invalid project file');
+            setItems(data.items);
+            setSelectedIds([]);
+            setClipboard([]);
+            if (Array.isArray(data.layers)) setLayers(data.layers);
+            if (data.activeLayerId) setActiveLayerId(data.activeLayerId);
+            if (data.pan) setPan(data.pan);
+            if (typeof data.zoom === 'number') setZoom(data.zoom);
+            if (data.bgImage) setBgImage(data.bgImage);
+            if (Array.isArray(data.measurePoints)) setMeasurePoints(data.measurePoints);
+            if (Array.isArray(data.measureResults)) setMeasureResults(data.measureResults);
+            if (typeof data.pixelsPerMm === 'number') setPixelsPerMm(data.pixelsPerMm);
+            if (typeof data.scaleLabel === 'string') setScaleLabel(data.scaleLabel);
+            if (typeof data.snapEnabled === 'boolean') setSnapEnabled(data.snapEnabled);
+            if (data.gridType) setGridType(data.gridType);
+            if (typeof data.isSketchMode === 'boolean') setIsSketchMode(data.isSketchMode);
+            if (data.customIcons && typeof data.customIcons === 'object') {
+              setCustomIcons(data.customIcons);
+              safeSetLocalStorage('customIcons', JSON.stringify(data.customIcons));
+            }
+            setProjectLoaded(true);
+            if (hm.current) {
+              hm.current.hist = [[JSON.parse(JSON.stringify(data.items))]];
+              hm.current.idx = 0;
+              hm.current.update();
+            }
+          } catch (err) {
+            alert('JSON 檔案格式錯誤');
+            console.warn(err);
+          }
+        };
+        reader.readAsText(file);
+        e.target.value = '';
       };
 
       const del = () => {
@@ -3013,7 +3349,10 @@
         const link = document.createElement('a');
         link.href = URL.createObjectURL(blob);
         link.download = 'analytical-planner-export.svg';
+        document.body.appendChild(link);
         link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(link.href);
       };
 
       const exportPNG = () => {
@@ -3050,7 +3389,9 @@
           const a = document.createElement('a');
           a.download = 'analytical-planner-export.png';
           a.href = canvas.toDataURL('image/png');
+          document.body.appendChild(a);
           a.click();
+          document.body.removeChild(a);
         };
         img.src = svgUrl;
       };
@@ -3317,7 +3658,10 @@
         const link = document.createElement('a');
         link.href = URL.createObjectURL(blob);
         link.download = 'analytical-planner-export.dxf';
+        document.body.appendChild(link);
         link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(link.href);
       };
 
       const buildPdf = (itemsToExport, width, height) => {
@@ -3547,7 +3891,7 @@
           if (e.code === 'Space' && !e.ctrlKey && !e.metaKey && !e.altKey && !e.repeat) {
             e.preventDefault();
             const toolOrder = [
-              'pan', 'select', 'eyedropper', 'guide_h', 'guide_v',
+              'pan', 'select', 'eraser', 'eyedropper', 'guide_h', 'guide_v',
               'arrow', 'road', 'leader_text', 'curve_arrow', 'spline',
               'zone', 'circle_zone', 'highlight', 'radiating_circle', 'triangle_marker', 'icon_element', 'entrance', 'node', 'text'
             ];
@@ -3562,7 +3906,7 @@
           if (e.key === 'Alt' && !e.shiftKey && !e.ctrlKey && !e.metaKey && !e.repeat) {
             e.preventDefault();
             const toolOrder = [
-              'pan', 'select', 'eyedropper', 'guide_h', 'guide_v',
+              'pan', 'select', 'eraser', 'eyedropper', 'guide_h', 'guide_v',
               'arrow', 'road', 'leader_text', 'curve_arrow', 'spline',
               'zone', 'circle_zone', 'highlight', 'radiating_circle', 'triangle_marker', 'icon_element', 'entrance', 'node', 'text'
             ];
@@ -3576,11 +3920,12 @@
           if (e.shiftKey && !e.ctrlKey && !e.metaKey && !e.altKey) {
             const key = e.key.toLowerCase();
             const toolMap = {
-              'h': 'pan', 'v': 'select', 'i': 'eyedropper', 'x': 'guide_h', 'y': 'guide_v',
+              'h': 'pan', 'v': 'select', 'q': 'eraser', 'i': 'eyedropper', 'x': 'guide_h', 'y': 'guide_v',
               'a': 'arrow', 'r': 'road', 'l': 'leader_text', 'c': 'curve_arrow', 'p': 'spline',
               'z': 'zone', 'j': 'circle_zone', 'o': 'highlight', 'b': 'radiating_circle', 'm': 'triangle_marker', 's': 'icon_element', 'e': 'entrance', 'n': 'node', 't': 'text'
             };
             if (toolMap[key]) {
+              if (pdfCalibrationPending) return;
               e.preventDefault();
               setActiveTool(toolMap[key]);
               return;
@@ -3620,22 +3965,49 @@
       }, [selectedIds, items, clipboard, canMergeLines, canMergeZones, canGroup, canUngroup]);
 
       return (
-        <div className="flex h-screen text-[#37352f] overflow-hidden bg-white">
-          {showToolbar && <Toolbar activeTool={activeTool} setActiveTool={setActiveTool} activeColor={activeColor} setActiveColor={handleColorChange} setMeasurePoints={setMeasurePoints} setMeasureResults={setMeasureResults} customIcons={customIcons} svgInputRef={svgInputRef} saveCustomIconLibrary={saveCustomIconLibrary} importCustomIconLibrary={importCustomIconLibrary} handleFillAction={handleFillAction} t={t} locale={locale} />}
+        <div className="flex h-screen text-[#37352f] overflow-visible bg-white">
+          {showToolbar && <Toolbar activeTool={activeTool} setActiveTool={setActiveTool} activeColor={activeColor} setActiveColor={handleColorChange} setMeasurePoints={setMeasurePoints} setMeasureResults={setMeasureResults} customIcons={customIcons} svgInputRef={svgInputRef} saveCustomIconLibrary={saveCustomIconLibrary} importCustomIconLibrary={importCustomIconLibrary} handleFillAction={handleFillAction} t={t} locale={locale} calibrationPending={pdfCalibrationPending} />}
           <div className={`flex-1 flex flex-col relative overflow-hidden bg-[#f7f6f3] ${isTabletSidePanel ? 'pr-72' : ''}`}>
-            <input type="file" ref={fileInputRef} onChange={handleImageUpload} accept="image/*" className="hidden" />
-            <input type="file" ref={svgInputRef} onChange={handleSVGUpload} accept=".svg,image/svg+xml" className="hidden" />
-            <input type="file" ref={imageItemInputRef} onChange={handleImageItemUpload} accept="image/*" className="hidden" />
+            <input type="file" ref={fileInputRef} onChange={handleImageUpload} accept="image/*" style={{position:'fixed', left:0, top:0, width:'1px', height:'1px', opacity:0}} aria-hidden="true" />
+            <input type="file" ref={svgInputRef} onChange={handleSVGUpload} accept=".svg,image/svg+xml" style={{position:'fixed', left:0, top:0, width:'1px', height:'1px', opacity:0}} aria-hidden="true" />
+            <input type="file" ref={imageItemInputRef} onChange={handleImageItemUpload} accept="image/*" style={{position:'fixed', left:0, top:0, width:'1px', height:'1px', opacity:0}} aria-hidden="true" />
+            <input type="file" ref={projectFileInputRef} onChange={handleProjectUpload} accept=".json,application/json" style={{position:'fixed', left:0, top:0, width:'1px', height:'1px', opacity:0}} aria-hidden="true" />
+            <input type="file" ref={pdfInputRef} onChange={handlePdfUpload} accept="application/pdf" style={{position:'fixed', left:0, top:0, width:'1px', height:'1px', opacity:0}} aria-hidden="true" />
             {isTabletSidePanel ? (
               <div className="absolute right-0 top-0 bottom-0 z-20 w-72 bg-white border-l border-gray-200 shadow-xl overflow-y-auto">
-                {topbarStage < 2 && <Topbar snapEnabled={snapEnabled} setSnapEnabled={setSnapEnabled} isSketchMode={isSketchMode} setIsSketchMode={setIsSketchMode} gridType={gridType} setGridType={setGridType} canUndo={canUndo} canRedo={canRedo} undo={undo} redo={redo} snapshots={snapshots} saveSnapshot={saveSnapshot} loadSnapshot={loadSnapshot} handleMergeLines={handleMergeLines} handleZoneBoolean={handleZoneBoolean} handleSmartFill={handleSmartFill} handleFillClosedArea={handleFillClosedArea} generateLegend={generateLegend} exportSVG={exportSVG} exportPNG={exportPNG} exportDXF={exportDXF} exportPDF={exportPDF} selectedIds={selectedIds} setItems={setItems} commitHistory={commitHistory} canMergeLines={canMergeLines} canMergeZones={canMergeZones} onImportBg={() => fileInputRef.current.click()} onImportImageItem={() => imageItemInputRef.current?.click()} clearBackground={clearBackground} bgImage={bgImage} zoom={zoom} setZoom={setZoom} setPan={setPan} canGroup={canGroup} canUngroup={canUngroup} handleGroup={handleGroup} handleUngroup={handleUngroup} handleAlign={handleAlign} canDistribute={canDistribute} handleDistribute={handleDistribute} handleMirror={handleMirror} svgInputRef={svgInputRef} saveCustomIconLibrary={saveCustomIconLibrary} importCustomIconLibrary={importCustomIconLibrary} customIcons={customIcons} setActiveTool={setActiveTool} showRightPanel={showRightPanel} setShowRightPanel={setShowRightPanel} showToolbar={showToolbar} toggleToolbar={toggleToolbar} topbarStage={topbarStage} t={t} locale={locale} setLocale={setLocale} onNewFile={openNewFile} />}
+                {topbarStage < 2 && <Topbar snapEnabled={snapEnabled} setSnapEnabled={setSnapEnabled} isSketchMode={isSketchMode} setIsSketchMode={setIsSketchMode} gridType={gridType} setGridType={setGridType} canUndo={canUndo} canRedo={canRedo} undo={undo} redo={redo} snapshots={snapshots} saveSnapshot={saveSnapshot} loadSnapshot={loadSnapshot} handleMergeLines={handleMergeLines} handleZoneBoolean={handleZoneBoolean} handleSmartFill={handleSmartFill} handleFillClosedArea={handleFillClosedArea} generateLegend={generateLegend} exportSVG={exportSVG} exportPNG={exportPNG} exportDXF={exportDXF} exportPDF={exportPDF} selectedIds={selectedIds} setItems={setItems} commitHistory={commitHistory} canMergeLines={canMergeLines} canMergeZones={canMergeZones} onImportBg={() => fileInputRef.current?.click?.()} onImportImageItem={() => imageItemInputRef.current?.click?.()} onImportPdf={() => pdfInputRef.current?.click?.()} clearBackground={clearBackground} bgImage={bgImage} zoom={zoom} setZoom={setZoom} setPan={setPan} canGroup={canGroup} canUngroup={canUngroup} handleGroup={handleGroup} handleUngroup={handleUngroup} handleAlign={handleAlign} canDistribute={canDistribute} handleDistribute={handleDistribute} handleMirror={handleMirror} svgInputRef={svgInputRef} saveCustomIconLibrary={saveCustomIconLibrary} importCustomIconLibrary={importCustomIconLibrary} saveProjectToFile={saveProjectToFile} loadProjectFromFile={loadProjectFromFile} customIcons={customIcons} setActiveTool={setActiveTool} showRightPanel={showRightPanel} setShowRightPanel={setShowRightPanel} showToolbar={showToolbar} toggleToolbar={toggleToolbar} topbarStage={topbarStage} pdfPage={pdfPage} pdfTotalPages={pdfTotalPages} onPdfPageChange={handlePdfPageChange} pdfLoading={pdfLoading} calibrationPending={pdfCalibrationPending} t={t} locale={locale} setLocale={setLocale} onNewFile={openNewFile} />}
               </div>
             ) : (
-              topbarStage < 2 && <Topbar snapEnabled={snapEnabled} setSnapEnabled={setSnapEnabled} isSketchMode={isSketchMode} setIsSketchMode={setIsSketchMode} gridType={gridType} setGridType={setGridType} canUndo={canUndo} canRedo={canRedo} undo={undo} redo={redo} snapshots={snapshots} saveSnapshot={saveSnapshot} loadSnapshot={loadSnapshot} handleMergeLines={handleMergeLines} handleZoneBoolean={handleZoneBoolean} handleSmartFill={handleSmartFill} handleFillClosedArea={handleFillClosedArea} generateLegend={generateLegend} exportSVG={exportSVG} exportPNG={exportPNG} exportDXF={exportDXF} exportPDF={exportPDF} selectedIds={selectedIds} setItems={setItems} commitHistory={commitHistory} canMergeLines={canMergeLines} canMergeZones={canMergeZones} onImportBg={() => fileInputRef.current.click()} onImportImageItem={() => imageItemInputRef.current?.click()} clearBackground={clearBackground} bgImage={bgImage} zoom={zoom} setZoom={setZoom} setPan={setPan} canGroup={canGroup} canUngroup={canUngroup} handleGroup={handleGroup} handleUngroup={handleUngroup} handleAlign={handleAlign} canDistribute={canDistribute} handleDistribute={handleDistribute} handleMirror={handleMirror} svgInputRef={svgInputRef} saveCustomIconLibrary={saveCustomIconLibrary} importCustomIconLibrary={importCustomIconLibrary} customIcons={customIcons} setActiveTool={setActiveTool} showRightPanel={showRightPanel} setShowRightPanel={setShowRightPanel} showToolbar={showToolbar} toggleToolbar={toggleToolbar} topbarStage={topbarStage} t={t} locale={locale} setLocale={setLocale} onNewFile={openNewFile} />
+              topbarStage < 2 && <Topbar snapEnabled={snapEnabled} setSnapEnabled={setSnapEnabled} isSketchMode={isSketchMode} setIsSketchMode={setIsSketchMode} gridType={gridType} setGridType={setGridType} canUndo={canUndo} canRedo={canRedo} undo={undo} redo={redo} snapshots={snapshots} saveSnapshot={saveSnapshot} loadSnapshot={loadSnapshot} handleMergeLines={handleMergeLines} handleZoneBoolean={handleZoneBoolean} handleSmartFill={handleSmartFill} handleFillClosedArea={handleFillClosedArea} generateLegend={generateLegend} exportSVG={exportSVG} exportPNG={exportPNG} exportDXF={exportDXF} exportPDF={exportPDF} selectedIds={selectedIds} setItems={setItems} commitHistory={commitHistory} canMergeLines={canMergeLines} canMergeZones={canMergeZones} onImportBg={() => fileInputRef.current?.click?.()} onImportImageItem={() => imageItemInputRef.current?.click?.()} onImportPdf={() => pdfInputRef.current?.click?.()} clearBackground={clearBackground} bgImage={bgImage} zoom={zoom} setZoom={setZoom} setPan={setPan} canGroup={canGroup} canUngroup={canUngroup} handleGroup={handleGroup} handleUngroup={handleUngroup} handleAlign={handleAlign} canDistribute={canDistribute} handleDistribute={handleDistribute} handleMirror={handleMirror} svgInputRef={svgInputRef} saveCustomIconLibrary={saveCustomIconLibrary} importCustomIconLibrary={importCustomIconLibrary} saveProjectToFile={saveProjectToFile} loadProjectFromFile={loadProjectFromFile} customIcons={customIcons} setActiveTool={setActiveTool} showRightPanel={showRightPanel} setShowRightPanel={setShowRightPanel} showToolbar={showToolbar} toggleToolbar={toggleToolbar} topbarStage={topbarStage} pdfPage={pdfPage} pdfTotalPages={pdfTotalPages} onPdfPageChange={handlePdfPageChange} pdfLoading={pdfLoading} t={t} locale={locale} setLocale={setLocale} onNewFile={openNewFile} />
             )}
-            <Canvas items={items} setItems={setItems} selectedIds={selectedIds} setSelectedIds={setSelectedIds} activeTool={activeTool} setActiveTool={setActiveTool} activeColor={activeColor} setActiveColor={handleColorChange} snapEnabled={snapEnabled} gridType={gridType} isSketchMode={isSketchMode} layers={layers} activeLayerId={activeLayerId} bgImage={bgImage} commitHistory={commitHistory} pan={pan} setPan={setPan} zoom={zoom} setZoom={setZoom} canGroup={canGroup} canUngroup={canUngroup} handleGroup={handleGroup} handleUngroup={handleUngroup} handleAlign={handleAlign} handleDistribute={handleDistribute} handleMergeLines={handleMergeLines} handleZoneBoolean={handleZoneBoolean} measurePoints={measurePoints} setMeasurePoints={setMeasurePoints} measureResults={measureResults} setMeasureResults={setMeasureResults} pixelsPerMm={pixelsPerMm} customIcons={customIcons} t={t} />
+            <Canvas items={items} setItems={setItems} selectedIds={selectedIds} setSelectedIds={setSelectedIds} activeTool={activeTool} setActiveTool={setActiveTool} activeColor={activeColor} setActiveColor={handleColorChange} snapEnabled={snapEnabled} gridType={gridType} isSketchMode={isSketchMode} layers={layers} activeLayerId={activeLayerId} bgImage={bgImage} commitHistory={commitHistory} pan={pan} setPan={setPan} zoom={zoom} setZoom={setZoom} canGroup={canGroup} canUngroup={canUngroup} handleGroup={handleGroup} handleUngroup={handleUngroup} handleAlign={handleAlign} handleDistribute={handleDistribute} handleMergeLines={handleMergeLines} handleZoneBoolean={handleZoneBoolean} measurePoints={measurePoints} setMeasurePoints={setMeasurePoints} measureResults={measureResults} setMeasureResults={setMeasureResults} pixelsPerMm={pixelsPerMm} pdfCalibrationPending={pdfCalibrationPending} calibrationLineId={calibrationLineId} setCalibrationLineId={setCalibrationLineId} setCalibrationLineLengthPx={setCalibrationLineLengthPx} customIcons={customIcons} t={t} />
 
-            <div className="absolute top-20 right-4 z-40 pointer-events-auto">
+            {pdfCalibrationPending && (
+              <div className="fixed inset-0 z-50 flex items-center justify-center px-4 pointer-events-none">
+                <div className="w-full max-w-xl pointer-events-auto rounded-3xl border border-gray-200 bg-white shadow-2xl p-6">
+                  <h2 className="text-lg font-bold text-gray-900">校正向導</h2>
+                  <p className="mt-3 text-sm text-gray-600 leading-relaxed">為了確保分析圖比例精確，請在底圖上測量一段已知長度的線段。系統已自動切換到線段工具，請直接在 PDF 底圖上拉出一條已知距離的線段。</p>
+                  <div className="mt-4 space-y-3 text-sm text-gray-700">
+                    {calibrationLineLengthPx ? (
+                      <>
+                        <div>已繪製的線段長度：<span className="font-semibold">{calibrationLineLengthPx.toFixed(1)}</span> px</div>
+                        <label className="block text-xs font-semibold text-gray-500">請輸入此線段的真實長度（例如 10000 代表 10 公尺）</label>
+                        <input type="number" value={calibrationLengthInput} onChange={e => { setCalibrationLengthInput(e.target.value); setCalibrationError(''); }} className="w-full rounded-xl border border-gray-300 px-3 py-2 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100" placeholder="輸入已知長度 (mm)" />
+                        {calibrationError && <div className="text-xs text-red-600">{calibrationError}</div>}
+                        <div className="flex items-center gap-2">
+                          <button onClick={handleCalibrationConfirm} className="rounded-xl bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700">完成校正</button>
+                          <button onClick={resetCalibrationLine} className="rounded-xl border border-gray-300 px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50">重置線段</button>
+                        </div>
+                      </>
+                    ) : (
+                      <div className="rounded-2xl border border-dashed border-gray-300 bg-gray-50 p-4 text-sm text-gray-600">請在底圖上直接拉出一條已知長度線段，然後輸入該線段的實際長度。</div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            <div ref={floatingMenuRef} style={{ touchAction: 'none', ...(floatingMenuPos.x != null ? { left: floatingMenuPos.x, top: floatingMenuPos.y, right: 'auto' } : undefined) }} onPointerDown={handleFloatingMenuPointerDown} onPointerMove={handleFloatingMenuPointerMove} onPointerUp={handleFloatingMenuPointerUp} onPointerCancel={handleFloatingMenuPointerUp} className="absolute top-20 right-4 z-40 pointer-events-auto">
               <div className="flex items-center space-x-2 rounded-2xl border border-gray-200 bg-white/95 p-2 shadow-lg backdrop-blur-sm">
                 <button type="button" onClick={del} disabled={selectedIds.length === 0} className={`flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold transition ${selectedIds.length === 0 ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'bg-white text-gray-800 hover:bg-gray-50'}`} title={t('delete')}>
                   <Lucide.Trash2 size={16} /> {t('delete')}
@@ -3645,6 +4017,9 @@
                 </button>
                 <button type="button" onClick={pasteClipboard} disabled={clipboard.length === 0} className={`flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold transition ${clipboard.length === 0 ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'bg-white text-gray-800 hover:bg-gray-50'}`} title={t('paste')}>
                   <Lucide.Clipboard size={16} /> {t('paste')}
+                </button>
+                <button type="button" onClick={()=>setSnapEnabled(!snapEnabled)} className={`flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold transition ${snapEnabled ? 'bg-gray-900 text-white shadow-md' : 'bg-white text-gray-800 hover:bg-gray-50'}`} title={t('snap')}>
+                  <Lucide.Magnet size={16} /> {t('snap')}
                 </button>
                 <button type="button" onClick={undo} disabled={!canUndo} className={`flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold transition ${!canUndo ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'bg-white text-gray-800 hover:bg-gray-50'}`} title={t('undo')}>
                   <Lucide.Undo2 size={16} /> {t('undo')}
